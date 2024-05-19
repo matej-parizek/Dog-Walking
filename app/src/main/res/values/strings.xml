@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">BI-AND-SEMETRAL</string>
-    <string name="stats">statistics</string>
-    <string name="overview">overview</string>
+    <string name="stats">Statistics</string>
+    <string name="overview">Overview</string>
     <string name="error">ERROR</string>
+    <string name="stepper">Stepper</string>
+    <string name="dictionaries">Dictionaries</string>
+    <string name="settings">Settings</string>
+    <string name="person">Person</string>
+    <string name="dog">Dog</string>
+    <string name="search">Search</string>
 </resources>

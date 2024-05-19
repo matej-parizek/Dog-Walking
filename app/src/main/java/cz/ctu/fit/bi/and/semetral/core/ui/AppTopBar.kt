@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semetral.core.ui.bar.top
+package cz.ctu.fit.bi.and.semetral.core.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import cz.ctu.fit.bi.and.semetral.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -20,12 +22,12 @@ import kotlinx.coroutines.launch
 fun AppTopBar(
     coroutineScope: CoroutineScope,
     drawerState: DrawerState,
-    text: String = "Stepper"
+    text: Int = R.string.error
 ) {
     TopAppBar(
         title = {
             Text(
-                text = text,
+                text = stringResource(id = text),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onPrimary,
             )
