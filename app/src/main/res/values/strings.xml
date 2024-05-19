@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">BI-AND-SEMETRAL</string>
+    <string name="stats">statistics</string>
+    <string name="overview">overview</string>
+    <string name="error">ERROR</string>
+</resources>
