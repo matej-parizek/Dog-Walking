@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cz.ctu.fit.bi.and.semetral.R
-import cz.ctu.fit.bi.and.semetral.core.ui.bar.top.AppTopBar
 import cz.ctu.fit.bi.and.semetral.ui.theme.BackgroundCircleIndicator
 import cz.ctu.fit.bi.and.semetral.ui.theme.CircleIndicator
 
@@ -40,18 +39,14 @@ import cz.ctu.fit.bi.and.semetral.ui.theme.CircleIndicator
 fun StepperScreen(
     viewModel: StepperViewModel = StepperViewModel(),
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = { AppTopBar(text = "Stepper") }
-    ) {
-        //TODO FROM VIEW
-        Column(modifier = Modifier.padding(it)) {
-            ProcessIndicator(
-                modifier = Modifier.fillMaxWidth(),
-                size = 150.dp,
-                viewModel = viewModel
-            )
-        }
+
+    //TODO FROM VIEW
+    Column {
+        ProcessIndicator(
+            modifier = Modifier.fillMaxWidth(),
+            size = 150.dp,
+            viewModel = viewModel
+        )
     }
 }
 
