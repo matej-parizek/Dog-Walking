@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "cz.ctu.fit.bi.and.semetral"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -103,5 +103,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
 
+    //Ycharts
+    implementation("co.yml:ycharts:2.1.0")
 
 }

@@ -9,4 +9,12 @@
     <string name="person">Person</string>
     <string name="dog">Dog</string>
     <string name="search">Search</string>
+    <string name="one">One</string>
+    <string name="two">Two</string>
+    <string name="tree">Tree</string>
+    <string name="four">Four</string>
+    <string name="open">open</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
 </resources>

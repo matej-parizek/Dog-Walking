@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semetral.feature.stepper.ui
+package cz.ctu.fit.bi.and.semetral.feature.stepper.ui.stepper
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

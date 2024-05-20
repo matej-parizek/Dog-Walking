@@ -9,8 +9,8 @@ import cz.ctu.fit.bi.and.semetral.feature.dictionaries.ui.DictionariesScreen
 import cz.ctu.fit.bi.and.semetral.feature.dictionaries.ui.Search
 import cz.ctu.fit.bi.and.semetral.feature.settings.ui.SettingsScreen
 import cz.ctu.fit.bi.and.semetral.feature.settings.ui.SettingsScreenDog
-import cz.ctu.fit.bi.and.semetral.feature.stepper.ui.StatScreen
-import cz.ctu.fit.bi.and.semetral.feature.stepper.ui.StepperScreen
+import cz.ctu.fit.bi.and.semetral.feature.stepper.ui.stats.StatScreen
+import cz.ctu.fit.bi.and.semetral.feature.stepper.ui.stepper.StepperScreen
 
 @Composable
 fun Navigation(

@@ -74,6 +74,10 @@ private fun rightNavBarIcon(route: String): Int {
     return when (route) {
         Screens.Stepper.route -> R.drawable.stats
         Screens.Stats.route -> R.drawable.stats
+        Screens.Dictionaries.route -> R.drawable.search
+        Screens.Search.route -> R.drawable.search
+        Screens.Settings.route -> R.drawable.dog
+        Screens.SettingsDog.route -> R.drawable.dog
         else -> R.drawable.error
     }
 }
@@ -96,7 +100,10 @@ private fun leftNavBarIcon(route: String): Int {
     return when (route) {
         Screens.Stepper.route -> R.drawable.jogging
         Screens.Stats.route -> R.drawable.jogging
-
+        Screens.Dictionaries.route -> R.drawable.dictionary
+        Screens.Search.route -> R.drawable.dictionary
+        Screens.Settings.route -> R.drawable.user
+        Screens.SettingsDog.route -> R.drawable.user
         else -> R.drawable.error
     }
 }
