@@ -1,108 +1,140 @@
 package cz.ctu.fit.bi.and.semetral.feature.settings.ui
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cz.ctu.fit.bi.and.semetral.R
 import cz.ctu.fit.bi.and.semetral.ui.theme.Typography
 
 @Composable
 @Preview
 fun SettingsScreen() {
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+        val modifier = Modifier
+            .weight(1f)
+            .fillMaxSize()
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(start = 20.dp)
+                .width(120.dp),
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = "Dog size:",
-                style = Typography.bodyLarge
+            SettingOption(
+                modifier = modifier,
+                text = "Weight:"
             )
-            Spacer(modifier = Modifier.width(10.dp))
-            DropBox()
+
+            SettingOption(
+                modifier = modifier,
+                text = "Min. steps:"
+            )
+
+            SettingOption(
+                modifier = modifier,
+                text = "Dog type:"
+            )
         }
+        Spacer(modifier = Modifier.width(20.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(end = 20.dp),
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Slider(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize(),
+                range = 20f..240f,
+                slider = 60f
+            )
+            Slider(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize(),
+                range = 10000f..100000f,
+                slider = 10000f
+            )
+
+            Slider(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize(),
+                range = 0f..2f,
+                slider = 1f,
+                steps = 1
+            )
+        }
+
     }
 
 }
 
+@Composable
+fun Slider(
+    range: ClosedFloatingPointRange<Float> = 0f..1f,
+    steps: Int = 0,
+    modifier: Modifier,
+    slider: Float = 10000f
+) {
+    var sliderPosition by remember {
+        mutableFloatStateOf(slider)
+    }
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Slider(
+            modifier = Modifier
+                .semantics { contentDescription = "Localized Description" },
+            value = sliderPosition,
+            onValueChange = { sliderPosition = it },
+            valueRange = range,
+            steps = steps
+        )
+    }
+}
 
 @Composable
-fun DropBox(
-    modifier: Modifier = Modifier,
+fun SettingOption(
+    modifier: Modifier,
+    text: String
 ) {
-    Box(
+    Column(
         modifier = modifier
-            .wrapContentSize(Alignment.TopStart),
     ) {
-        var expanded by remember { mutableStateOf(false) }
-        var text by remember { mutableStateOf("") }
-        val list = listOf(
-            stringResource(R.string.small),
-            stringResource(R.string.medium),
-            stringResource(R.string.large)
+        Text(
+            text = text,
+            style = Typography.bodyLarge,
         )
-        val mod = Modifier.width(160.dp)
-        TextField(
-            value = text,
-            readOnly = true,
-            trailingIcon = {
-                IconButton(onClick = { expanded = !expanded }) {
-                    Icon(
-                        imageVector = if (expanded) Icons.Filled.KeyboardArrowUp
-                        else Icons.Filled.KeyboardArrowDown,
-                        contentDescription = null
-                    )
-                }
-            },
-            modifier = mod,
-            onValueChange = {}
-        )
-        DropdownMenu(
-            modifier = mod,
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
-            list.forEachIndexed { index, value ->
-                DropdownMenuItem(
-                    text = { Text(value) },
-                    onClick = {
-                        expanded = false
-                        text = value
-                    },
-                )
-                if (index < list.size - 1)
-                    HorizontalDivider()
-            }
-        }
+
     }
 }

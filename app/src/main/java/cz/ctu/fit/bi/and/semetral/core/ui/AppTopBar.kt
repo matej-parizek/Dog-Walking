@@ -12,8 +12,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import cz.ctu.fit.bi.and.semetral.R
+import cz.ctu.fit.bi.and.semetral.ui.theme.Typography
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -28,7 +28,7 @@ fun AppTopBar(
         title = {
             Text(
                 text = stringResource(id = text),
-                style = MaterialTheme.typography.headlineMedium,
+                style = Typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onPrimary,
             )
         },

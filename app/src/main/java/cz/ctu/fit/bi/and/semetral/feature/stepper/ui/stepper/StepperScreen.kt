@@ -59,17 +59,17 @@ fun StepperStat(
     Column(modifier) {
         IconWithText(
             id = R.drawable.fire,
-            text = "$kcalValue Kcal"
+            text = stringResource(R.string.kcal, kcalValue)
         )
         Spacer(modifier = Modifier.height(12.dp))
         IconWithText(
             id = R.drawable.mountain,
-            text = "$elevationGain Meters"
+            text = stringResource(R.string.meters, elevationGain)
         )
         Spacer(modifier = Modifier.height(12.dp))
         IconWithText(
             id = R.drawable.footprint,
-            text = "$steps Steps"
+            text = stringResource(R.string.steps, steps)
         )
     }
 }

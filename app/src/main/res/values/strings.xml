@@ -17,4 +17,7 @@
     <string name="small">Small</string>
     <string name="medium">Medium</string>
     <string name="large">Large</string>
+    <string name="kcal">%1$s Kcal</string>
+    <string name="meters">%1$s Meters</string>
+    <string name="steps">%1$s Steps</string>
 </resources>

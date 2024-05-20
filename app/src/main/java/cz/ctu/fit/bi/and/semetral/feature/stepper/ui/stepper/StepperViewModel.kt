@@ -6,5 +6,5 @@ import androidx.lifecycle.ViewModel
 class StepperViewModel(
 //    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    // Vypocet Kroky * ((Váha(kg) * 0,035) / 1000)
+    // ((pocet kroku * vaha * (výška * 0.413/100)) / 1000 ) * 0.05
 }
