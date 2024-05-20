@@ -32,6 +32,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import cz.ctu.fit.bi.and.semetral.R
+import cz.ctu.fit.bi.and.semetral.ui.theme.Typography
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -128,10 +129,13 @@ fun NavItem(
     painter: Int,
 ) {
     NavigationDrawerItem(
-        label = { Text(text = stringResource(id = name)) },
+        label = { Text(
+            text = stringResource(id = name),
+            style = Typography.labelMedium
+        )},
         icon = {
             Icon(
-                modifier = Modifier.size(36.dp),
+                modifier = Modifier.size(24.dp),
                 painter = painterResource(id = painter),
                 contentDescription = null
             )

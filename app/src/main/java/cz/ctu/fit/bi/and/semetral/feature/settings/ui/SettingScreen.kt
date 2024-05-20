@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
@@ -35,11 +36,13 @@ import cz.ctu.fit.bi.and.semetral.ui.theme.Typography
 fun SettingsScreen() {
 
     Column(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
             Text(
                 text = "Dog size:",
@@ -59,7 +62,7 @@ fun DropBox(
 ) {
     Box(
         modifier = modifier
-            .wrapContentSize(Alignment.TopStart)
+            .wrapContentSize(Alignment.TopStart),
     ) {
         var expanded by remember { mutableStateOf(false) }
         var text by remember { mutableStateOf("") }
@@ -68,7 +71,7 @@ fun DropBox(
             stringResource(R.string.medium),
             stringResource(R.string.large)
         )
-        val mod = Modifier.width(120.dp)
+        val mod = Modifier.width(160.dp)
         TextField(
             value = text,
             readOnly = true,

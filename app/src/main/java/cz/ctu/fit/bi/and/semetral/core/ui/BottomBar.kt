@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import cz.ctu.fit.bi.and.semetral.R
+import cz.ctu.fit.bi.and.semetral.ui.theme.Typography
 
 @Composable
 fun BottomBar(
@@ -150,13 +151,13 @@ private fun RowScope.NavigationBarItem(
                 painter = painter,
                 contentDescription = null,
                 tint = colorContent,
-                modifier = Modifier.size(48.dp)
+                modifier = Modifier.size(24.dp)
             )
         },
         label = {
             Text(
                 text = name,
-                style = MaterialTheme.typography.labelMedium,
+                style = Typography.labelMedium,
                 color = colorContent,
             )
         }
