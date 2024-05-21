@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import cz.ctu.fit.bi.and.semestral.R
+import cz.ctu.fit.bi.and.semestral.ui.theme.IconSize
 import cz.ctu.fit.bi.and.semestral.ui.theme.Typography
 
 @Composable
@@ -28,18 +28,20 @@ fun BottomBar(
             name = stringResource(id = leftNavBarName(route)),
             selected = hasLeftRoute(route= route),
             onClick = {
+
                 navigationController.navigate(navigateLeft(route))
             }
         )
-        NavigationBarItem(
-            painter = painterResource(id = rightNavBarIcon(route)),
-            name = stringResource(id = rightNavBarName(route)),
-            selected = hasRightRoute(route = route),
-            onClick = {
-                navigationController.navigate(navigateRight(route))
-            }
-        )
-
+        if(route != Screens.Dictionaries.route) {
+            NavigationBarItem(
+                painter = painterResource(id = rightNavBarIcon(route)),
+                name = stringResource(id = rightNavBarName(route)),
+                selected = hasRightRoute(route = route),
+                onClick = {
+                    navigationController.navigate(navigateRight(route))
+                }
+            )
+        }
     }
 }
 
@@ -50,9 +52,7 @@ private fun navigateLeft(route: String): String {
 
         Screens.Settings.route -> Screens.Settings.route
         Screens.SettingsDog.route -> Screens.Settings.route
-
         Screens.Dictionaries.route -> Screens.Dictionaries.route
-        Screens.Search.route -> Screens.Dictionaries.route
         else -> Screens.Error.route
     }
 }
@@ -64,9 +64,6 @@ private fun navigateRight(route: String): String {
 
         Screens.Settings.route -> Screens.SettingsDog.route
         Screens.SettingsDog.route -> Screens.SettingsDog.route
-
-        Screens.Dictionaries.route -> Screens.Search.route
-        Screens.Search.route -> Screens.Search.route
         else -> Screens.Error.route
     }
 }
@@ -75,8 +72,7 @@ private fun rightNavBarIcon(route: String): Int {
     return when (route) {
         Screens.Stepper.route -> R.drawable.stats
         Screens.Stats.route -> R.drawable.stats
-        Screens.Dictionaries.route -> R.drawable.search
-        Screens.Search.route -> R.drawable.search
+        Screens.Dictionaries.route -> R.drawable.dictionary
         Screens.Settings.route -> R.drawable.dog
         Screens.SettingsDog.route -> R.drawable.dog
         else -> R.drawable.error
@@ -92,7 +88,6 @@ private fun rightNavBarName(route: String): Int {
         Screens.SettingsDog.route -> R.string.dog
 
         Screens.Dictionaries.route -> R.string.search
-        Screens.Search.route -> R.string.search
         else -> R.string.error
     }
 }
@@ -102,7 +97,6 @@ private fun leftNavBarIcon(route: String): Int {
         Screens.Stepper.route -> R.drawable.jogging
         Screens.Stats.route -> R.drawable.jogging
         Screens.Dictionaries.route -> R.drawable.dictionary
-        Screens.Search.route -> R.drawable.dictionary
         Screens.Settings.route -> R.drawable.user
         Screens.SettingsDog.route -> R.drawable.user
         else -> R.drawable.error
@@ -118,13 +112,11 @@ private fun leftNavBarName(route: String): Int {
         Screens.SettingsDog.route -> R.string.person
 
         Screens.Dictionaries.route -> R.string.dictionaries
-        Screens.Search.route -> R.string.dictionaries
         else -> R.string.error
     }
 }
 
 private fun hasRightRoute(route: String) = route in listOf(
-    Screens.Search.route,
     Screens.SettingsDog.route,
     Screens.Stats.route,
 )
@@ -151,13 +143,13 @@ private fun RowScope.NavigationBarItem(
                 painter = painter,
                 contentDescription = null,
                 tint = colorContent,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(IconSize.smallHead)
             )
         },
         label = {
             Text(
                 text = name,
-                style = Typography.labelMedium,
+                style = Typography.headlineSmall,
                 color = colorContent,
             )
         }

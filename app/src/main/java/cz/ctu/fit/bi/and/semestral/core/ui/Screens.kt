@@ -6,6 +6,5 @@ sealed class Screens(val route: String) {
     data object Settings : Screens("settings")
     data object SettingsDog : Screens("settingsDog")
     data object Dictionaries : Screens("dictionaries")
-    data object Search : Screens("search")
     data object Error : Screens("error")
 }

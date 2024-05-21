@@ -1,6 +1,5 @@
 package cz.ctu.fit.bi.and.semestral.feature.settings.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,7 +39,7 @@ fun SettingsDogScreen() {
                 modifier = modifier,
                 range = 20f..240f,
                 slider = 60f,
-                postfix = " kg"
+                postfix = " kg",
             )
         },
         { modifier ->
@@ -94,8 +93,9 @@ fun SettingsScreen() {
         { modifier ->
             Slider(
                 modifier = modifier,
-                range = 10000f..100000f,
-                slider = 10000f,
+                range = 3000f..20000f,
+                slider = 6000f,
+                steps = 67,
                 postfix = " steps"
             )
         }
@@ -157,7 +157,6 @@ fun Slider(
     var sliderPosition by remember {
         mutableFloatStateOf(slider)
     }
-    Log.println(Log.INFO, "SlidePosition", sliderPosition.toString())
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center

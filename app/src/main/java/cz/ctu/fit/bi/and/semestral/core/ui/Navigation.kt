@@ -34,9 +34,6 @@ fun Navigation(
         composable(route = Screens.SettingsDog.route) {
             SettingsDogScreen()
         }
-        composable(route = Screens.Search.route) {
-            Search()
-        }
         composable(route = Screens.Dictionaries.route) {
             DictionariesScreen()
         }

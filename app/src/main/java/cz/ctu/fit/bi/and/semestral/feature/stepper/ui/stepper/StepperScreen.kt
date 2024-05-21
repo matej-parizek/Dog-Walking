@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import cz.ctu.fit.bi.and.semestral.R
 import cz.ctu.fit.bi.and.semestral.ui.theme.BackgroundCircleIndicator
 import cz.ctu.fit.bi.and.semestral.ui.theme.CircleIndicator
+import cz.ctu.fit.bi.and.semestral.ui.theme.IconSize
 
 
 @Composable
@@ -92,15 +93,16 @@ fun IconWithText(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.size(IconSize.mediumBody),
             painter = painterResource(id = id),
             contentDescription = null,
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = text,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 4.dp)
+
         )
     }
 }
@@ -180,7 +182,7 @@ fun ProcessIndicator(
  */
 @Composable
 fun CustomCircularProgressIndicator(
-    size: Dp = 96.dp,
+    size: Dp = IconSize.largeGraph,
     strokeWidth: Dp = 8.dp,
     progress: Float = 1F,
     id: Int,

@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cz.ctu.fit.bi.and.semestral.R
 
@@ -12,7 +13,6 @@ private val fontFamily = FontFamily(
     Font(R.font.inter_regular, weight = FontWeight.Normal),
     Font(R.font.inter_bold, weight = FontWeight.Bold),
 )
-
 
 
 val Typography = Typography(
@@ -85,4 +85,14 @@ val Typography = Typography(
         letterSpacing = 0.sp,
         fontFamily = fontFamily,
     ),
-    )
+)
+
+object IconSize {
+    val largeGraph = 96.dp
+    val largeHead = 36.dp
+    val mediumHead = 32.dp
+    val smallHead = 24.dp
+    val largeBody = 20.dp
+    val mediumBody = 16.dp
+    val smallBody = 12.dp
+}

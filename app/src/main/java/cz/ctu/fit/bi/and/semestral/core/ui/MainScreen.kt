@@ -8,10 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -26,18 +29,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import cz.ctu.fit.bi.and.semestral.R
+import cz.ctu.fit.bi.and.semestral.ui.theme.IconSize
 import cz.ctu.fit.bi.and.semestral.ui.theme.Typography
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-@Preview
 fun MainScreen() {
     val navController = rememberNavController()
     val coroutineScope = rememberCoroutineScope()
@@ -45,48 +47,14 @@ fun MainScreen() {
 
     ModalNavigationDrawer(
         drawerState = drawableState,
-        gesturesEnabled = true,
+        gesturesEnabled = false,
 
         drawerContent = {
-            ModalDrawerSheet(Modifier.fillMaxWidth(0.6f)) {
-                Box(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.secondary)
-                        .fillMaxWidth()
-                        .height(150.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.man),
-                        contentDescription = null
-                    )
-                }
-                HorizontalDivider()
-                NavItem(
-                    coroutineScope = coroutineScope,
-                    drawableState = drawableState,
-                    navController = navController,
-                    name = R.string.stepper,
-                    route = Screens.Stepper.route,
-                    painter = R.drawable.walking,
-                )
-                NavItem(
-                    coroutineScope = coroutineScope,
-                    drawableState = drawableState,
-                    navController = navController,
-                    name = R.string.dictionaries,
-                    route = Screens.Dictionaries.route,
-                    painter = R.drawable.dictionary,
-                )
-                NavItem(
-                    coroutineScope = coroutineScope,
-                    drawableState = drawableState,
-                    navController = navController,
-                    name = R.string.settings,
-                    route = Screens.Settings.route,
-                    painter = R.drawable.settings,
-                )
-            }
+            NavBottomBar(
+                navController = navController,
+                drawableState = drawableState,
+                coroutineScope = coroutineScope
+            )
         }
     ) {
         val currentEntry by navController.currentBackStackEntryAsState()
@@ -128,16 +96,20 @@ fun NavItem(
     route: String,
     painter: Int,
 ) {
+
     NavigationDrawerItem(
-        label = { Text(
-            text = stringResource(id = name),
-            style = Typography.labelMedium
-        )},
+        label = {
+            Text(
+                text = stringResource(id = name),
+                style = Typography.labelMedium,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        },
         icon = {
             Icon(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(IconSize.smallHead),
                 painter = painterResource(id = painter),
-                contentDescription = null
+                contentDescription = stringResource(R.string.bottom_icon),
             )
         },
         selected = false,
@@ -158,8 +130,71 @@ private fun route(route: String?): Int {
         Screens.Settings.route -> R.string.settings
         Screens.SettingsDog.route -> R.string.settings
         Screens.Dictionaries.route -> R.string.dictionaries
-        Screens.Search.route -> R.string.search
         Screens.Stats.route -> R.string.stats
         else -> R.string.error
     }
+}
+
+@Composable
+fun NavBottomBar(
+    navController: NavHostController,
+    drawableState: DrawerState,
+    coroutineScope: CoroutineScope
+) {
+
+    ModalDrawerSheet(Modifier.fillMaxWidth(0.6f)) {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.secondary)
+                .fillMaxWidth()
+                .height(150.dp),
+            contentAlignment = Alignment.TopStart
+        ) {
+
+            IconButton(
+                onClick = {
+                    coroutineScope.launch {
+                        drawableState.close()
+                    }
+                }) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    contentDescription = stringResource(R.string.menu),
+                    modifier = Modifier.size(IconSize.largeHead)
+                )
+            }
+            Icon(
+                modifier = Modifier.fillMaxWidth(),
+                painter = painterResource(id = R.drawable.man),
+                contentDescription = stringResource(R.string.logo)
+            )
+        }
+        HorizontalDivider()
+        NavItem(
+            coroutineScope = coroutineScope,
+            drawableState = drawableState,
+            navController = navController,
+            name = R.string.stepper,
+            route = Screens.Stepper.route,
+            painter = R.drawable.walking,
+        )
+        NavItem(
+            coroutineScope = coroutineScope,
+            drawableState = drawableState,
+            navController = navController,
+            name = R.string.dictionaries,
+            route = Screens.Dictionaries.route,
+            painter = R.drawable.dictionary,
+        )
+        NavItem(
+            coroutineScope = coroutineScope,
+            drawableState = drawableState,
+            navController = navController,
+            name = R.string.settings,
+            route = Screens.Settings.route,
+            painter = R.drawable.settings,
+        )
+    }
+
 }

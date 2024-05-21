@@ -1,5 +1,6 @@
 package cz.ctu.fit.bi.and.semestral.core.ui
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerState
@@ -11,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import cz.ctu.fit.bi.and.semestral.R
+import cz.ctu.fit.bi.and.semestral.ui.theme.IconSize
 import cz.ctu.fit.bi.and.semestral.ui.theme.Typography
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -41,7 +44,8 @@ fun AppTopBar(
                 Icon(
                     imageVector = Icons.Default.Menu,
                     tint = MaterialTheme.colorScheme.onPrimary,
-                    contentDescription = "Menu",
+                    contentDescription = stringResource(R.string.menu),
+                    modifier = Modifier.size(IconSize.largeHead)
                 )
             }
         },
