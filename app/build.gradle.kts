@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "cz.ctu.fit.bi.and.semetral"
+    namespace = "cz.ctu.fit.bi.and.semestral"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "cz.ctu.fit.bi.and.semetral"
+        applicationId = "cz.ctu.fit.bi.and.semestral"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
