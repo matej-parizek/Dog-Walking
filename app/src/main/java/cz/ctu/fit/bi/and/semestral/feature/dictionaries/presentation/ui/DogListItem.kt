@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semestral.feature.dictionaries.ui
+package cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,25 +17,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import cz.ctu.fit.bi.and.semestral.R
-import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.DogResult
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.domain.Dog
 
 @Composable
 fun DogListItem(
-    dog: DogResult,
+    dog: Dog,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.Center
     ) {
-        AsyncImage(
-            model = dog.image,
-            error = painterResource(id = R.drawable.error),
-            contentDescription = stringResource(id = R.string.avatar),
-            modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .size(64.dp),
-        )
+//        AsyncImage(
+//            model = dog.image,
+//            error = painterResource(id = R.drawable.error),
+//            contentDescription = stringResource(id = R.string.avatar),
+//            modifier = Modifier
+//                .clip(RoundedCornerShape(8.dp))
+//                .size(64.dp),
+//        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -49,7 +49,7 @@ fun DogListItem(
             )
 
             Text(
-                text = dog.type,
+                text = dog.group,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSecondary
             )

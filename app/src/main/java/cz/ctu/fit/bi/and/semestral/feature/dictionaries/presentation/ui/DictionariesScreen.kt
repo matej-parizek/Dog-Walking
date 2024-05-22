@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semestral.feature.dictionaries.ui
+package cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,18 +25,28 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cz.ctu.fit.bi.and.semestral.R
-import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.DogResult
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.DogState
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.DogViewModel
 import cz.ctu.fit.bi.and.semestral.ui.theme.IconSize
 import cz.ctu.fit.bi.and.semestral.ui.theme.Typography
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DictionariesScreen() {
-    Search()
+fun DictionariesScreen(
+    viewModel: DogViewModel = koinViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    Search(state)
 }
 
 @Composable
-fun Search() {
+fun Search(
+    state: DogState,
+
+    ) {
     var text by rememberSaveable { mutableStateOf("") }
     var expanded by rememberSaveable { mutableStateOf(false) }
 
@@ -86,19 +96,11 @@ fun Search() {
             expanded = expanded,
             onExpandedChange = { expanded = it },
         ) {
-            DogList(
-                list = listOf(
-                    DogResult()
-                )
-            )
+            DogList(state.dogs)
         }
         Spacer(modifier = Modifier.size(10.dp))
         if (!expanded) {
-            DogList(
-                list = listOf(
-                    DogResult()
-                )
-            )
+            DogList(state.dogs)
         }
     }
 }

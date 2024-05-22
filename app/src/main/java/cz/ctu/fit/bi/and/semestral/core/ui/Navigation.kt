@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import cz.ctu.fit.bi.and.semestral.feature.dictionaries.ui.DictionariesScreen
-import cz.ctu.fit.bi.and.semestral.feature.dictionaries.ui.Search
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.ui.DictionariesScreen
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.ui.Search
 import cz.ctu.fit.bi.and.semestral.feature.settings.ui.SettingsDogScreen
 import cz.ctu.fit.bi.and.semestral.feature.settings.ui.SettingsScreen
 import cz.ctu.fit.bi.and.semestral.feature.stepper.ui.stats.StatScreen

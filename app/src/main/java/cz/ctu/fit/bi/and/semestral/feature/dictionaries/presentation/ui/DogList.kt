@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semestral.feature.dictionaries.ui
+package cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,14 +15,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.DogResult
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.domain.Dog
 
 @Composable
 fun DogList(
+    list: List<Dog>,
     paddingValues: PaddingValues = PaddingValues(5.dp),
-    list: List<DogResult>
 ) {
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -42,7 +41,7 @@ fun DogList(
 
 @Composable
 private fun DogCard(
-    dog: DogResult,
+    dog: Dog,
     onClick: () -> Unit = {},
 ) {
     Card(
