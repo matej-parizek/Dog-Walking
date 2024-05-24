@@ -16,7 +16,9 @@ object RetroProvider {
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .client(
             OkHttpClient.Builder()
-                .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addNetworkInterceptor(
+                    HttpLoggingInterceptor()
+                    .setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build()
         )
         .build()

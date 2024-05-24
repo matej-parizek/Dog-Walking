@@ -13,4 +13,9 @@ class DogLocalDataSourceImp(
     override suspend fun upsertAll(data: List<Dog>) = dao.upsertAll(data.map { it.toDogEntity() })
     override fun getDogsStream(): Flow<List<Dog>> = dao.getDogsStream()
         .map { it.map { it.toDog() } }
+
+    override fun filterByQueryStream(query: String): Flow<List<Dog>> =
+        dao.filterByQueryStream(query)
+            .map { it.map { it.toDog() } }
+
 }

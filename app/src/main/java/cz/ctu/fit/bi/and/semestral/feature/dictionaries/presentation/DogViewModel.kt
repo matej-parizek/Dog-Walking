@@ -1,5 +1,6 @@
 package cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.DogRepository
@@ -10,8 +11,11 @@ import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 
 class DogViewModel(
+    private val savedStateHandle: SavedStateHandle,
     private val repository: DogRepository
 ) : ViewModel() {
+    val name = savedStateHandle.getStateFlow("name", "")
+
     private val _state = MutableStateFlow(DogState())
     val state: StateFlow<DogState> = _state
 
@@ -23,10 +27,23 @@ class DogViewModel(
         }
         fetch()
     }
+    fun onChange(query: String){
+        savedStateHandle["name"]= query
+        filterByQuery(query)
+    }
+    fun filterByQuery(query: String){
+        viewModelScope.launch {
+            repository.filterByQuery(query).collect{
+                _state.value = _state.value.copy(dogs = it)
+            }
+        }
+    }
+
     fun fetch() {
         viewModelScope.launch {
             repository.fetch()
         }
+        wait()
     }
 
 }

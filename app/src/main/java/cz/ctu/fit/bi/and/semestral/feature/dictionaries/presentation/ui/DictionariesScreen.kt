@@ -26,6 +26,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import cz.ctu.fit.bi.and.semestral.R
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.DogState
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.presentation.DogViewModel
@@ -39,15 +40,15 @@ fun DictionariesScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Search(state)
+    Search(state,viewModel)
 }
 
 @Composable
 fun Search(
     state: DogState,
-
+    viewModel: DogViewModel,
     ) {
-    var text by rememberSaveable { mutableStateOf("") }
+    val query by viewModel.name.collectAsStateWithLifecycle()
     var expanded by rememberSaveable { mutableStateOf(false) }
 
     Column(
@@ -61,8 +62,8 @@ fun Search(
                 .semantics { traversalIndex = -1f },
             inputField = {
                 SearchBarDefaults.InputField(
-                    query = text,
-                    onQueryChange = { text = it },
+                    query = query,
+                    onQueryChange = { viewModel.onChange(it)},
                     onSearch = { expanded = false },
                     expanded = expanded,
                     onExpandedChange = { expanded = it },
@@ -100,6 +101,7 @@ fun Search(
         }
         Spacer(modifier = Modifier.size(10.dp))
         if (!expanded) {
+            viewModel.filterByQuery("")
             DogList(state.dogs)
         }
     }

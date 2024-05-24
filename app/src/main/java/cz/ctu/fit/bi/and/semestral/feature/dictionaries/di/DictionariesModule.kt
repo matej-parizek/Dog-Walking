@@ -26,5 +26,5 @@ val dictionariesModule = module {
             dogLocalDataSource = get()
         )
     }
-    viewModel { DogViewModel(repository = get()) }
+    viewModel { DogViewModel(repository = get(), savedStateHandle = get()) }
 }
