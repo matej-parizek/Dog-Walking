@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semestral.feature.settings.ui
+package cz.ctu.fit.bi.and.semestral.feature.settings.presentation.ui
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box

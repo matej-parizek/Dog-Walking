@@ -19,11 +19,18 @@
     <string name="large">Large</string>
     <string name="kcal">%1$s Kcal</string>
     <string name="meters">%1$s Meters</string>
-    <string name="steps">%1$s Steps</string>
+    <string name="value_steps">%1$s Steps</string>
     <string name="avatar">Avatar</string>
     <string name="error1">error</string>
     <string name="search_text">Search text</string>
     <string name="menu">Menu</string>
     <string name="bottom_icon">Bottom Icon</string>
     <string name="logo">Logo</string>
+    <string name="weight">Weight:</string>
+    <string name="dog_type">Dog type:</string>
+    <string name="min_steps">Min. steps:</string>
+    <string name="kg">" kg"</string>
+    <string name="steps">" steps"</string>
+    <string name="height">Height</string>
+    <string name="cm">" cm"</string>
 </resources>

@@ -6,12 +6,17 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.local.DogEntity
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.local.dao.DogDao
+import cz.ctu.fit.bi.and.semestral.feature.settings.data.local.SettingEntity
+import cz.ctu.fit.bi.and.semestral.feature.settings.data.local.dao.SettingDao
 
-@Database(entities = [DogEntity::class], version = 1, exportSchema = false)
+@Database(entities = [DogEntity::class, SettingEntity::class], version = 1, exportSchema = false)
 abstract class WalkingDogDatabase : RoomDatabase() {
     abstract fun dogDao(): DogDao
+    abstract fun settingPersonDao() : SettingDao
 
-    companion object {
+            companion
+
+    object {
         private const val DATABASE_NAME = "walking_dog_database"
 
         fun newInstance(context: Context): WalkingDogDatabase =

@@ -11,6 +11,6 @@ interface DogApi {
     @GET("breeds")
     suspend fun getBreeds(@Query("page[number]")number: Int ): DogResponse
 
-    @GET("groups/{id}")
-    suspend fun getGroups(@Path("id") id: String): GroupResponse
+    @GET("groups")
+    suspend fun getGroups(): GroupResponse
 }

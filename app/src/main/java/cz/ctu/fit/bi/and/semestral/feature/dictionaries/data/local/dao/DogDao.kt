@@ -1,6 +1,7 @@
 package cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.local.DogEntity
@@ -19,4 +20,7 @@ interface DogDao {
 
     @Query("SELECT * FROM dog_entity WHERE name LIKE  '%' || :query || '%' ")
     fun filterByQueryStream(query: String): Flow<List<DogEntity>>
+
+    @Query("DELETE FROM dog_entity")
+    fun clear()
 }

@@ -1,9 +1,10 @@
 package cz.ctu.fit.bi.and.semestral.feature.dictionaries.data
 
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.api.DogRemoteDataSource
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.api.dto.DogDto
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.local.DogLocalDataSource
+import cz.ctu.fit.bi.and.semestral.feature.dictionaries.data.mapper.toDog
 import cz.ctu.fit.bi.and.semestral.feature.dictionaries.domain.Dog
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOf
@@ -14,10 +15,22 @@ class DogRepositoryImp(
 ) : DogRepository {
 
     override suspend fun fetch() {
-        for(page in 1..29){
-            dogLocalDataSource.upsertAll(dogRemoteDataSource.getDogs(page))
+        val listOfDogs = mutableListOf<DogDto>()
+        for (page in 1..29) {
+            listOfDogs.addAll(dogRemoteDataSource.getDogs(page))
         }
+        val listOfGroup = dogRemoteDataSource.getGroups()
+
+        val dogs = listOfDogs.map {
+            it.toDog() { idDogGroup ->
+                val groupMap = listOfGroup.associateBy { idGroup -> idGroup.id }
+                groupMap[idDogGroup]?.attributes?.name
+            }
+        }
+        dogLocalDataSource.upsertAll(dogs)
     }
+
+    override suspend fun clear() = dogLocalDataSource.clear()
 
     //TODO: set to ERROR Screen
     override suspend fun getDogs(): Flow<List<Dog>> {
@@ -33,7 +46,7 @@ class DogRepositoryImp(
         return try {
             dogLocalDataSource.filterByQueryStream(query)
                 .catch { emit(emptyList()) }
-        }catch (e: Throwable){
+        } catch (e: Throwable) {
             flowOf(emptyList())
         }
     }

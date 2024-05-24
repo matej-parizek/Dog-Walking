@@ -8,7 +8,6 @@ import cz.ctu.fit.bi.and.semestral.feature.dictionaries.domain.Dog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 
 class DogViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -27,13 +26,21 @@ class DogViewModel(
         }
         fetch()
     }
-    fun onChange(query: String){
-        savedStateHandle["name"]= query
+
+    override fun onCleared() {
+        viewModelScope.launch {
+            repository.clear()
+        }
+        super.onCleared()
+    }
+    fun onChange(query: String) {
+        savedStateHandle["name"] = query
         filterByQuery(query)
     }
-    fun filterByQuery(query: String){
+
+    fun filterByQuery(query: String) {
         viewModelScope.launch {
-            repository.filterByQuery(query).collect{
+            repository.filterByQuery(query).collect {
                 _state.value = _state.value.copy(dogs = it)
             }
         }
@@ -43,7 +50,6 @@ class DogViewModel(
         viewModelScope.launch {
             repository.fetch()
         }
-        wait()
     }
 
 }

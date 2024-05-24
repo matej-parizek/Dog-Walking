@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GroupResponse(
-    val data : GroupDto
+    val data : List<GroupDto>
 )

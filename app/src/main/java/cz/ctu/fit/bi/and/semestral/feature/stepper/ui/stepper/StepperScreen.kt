@@ -70,7 +70,7 @@ fun StepperStat(
         Spacer(modifier = Modifier.height(12.dp))
         IconWithText(
             id = R.drawable.footprint,
-            text = stringResource(R.string.steps, steps)
+            text = stringResource(R.string.value_steps, steps)
         )
     }
 }
