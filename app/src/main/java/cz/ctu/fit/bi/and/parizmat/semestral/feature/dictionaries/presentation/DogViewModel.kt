@@ -14,7 +14,6 @@ class DogViewModel(
     private val repository: DogRepository
 ) : ViewModel() {
     val name = savedStateHandle.getStateFlow("name", "")
-
     private val _state = MutableStateFlow(DogState())
     val state: StateFlow<DogState> = _state
 
