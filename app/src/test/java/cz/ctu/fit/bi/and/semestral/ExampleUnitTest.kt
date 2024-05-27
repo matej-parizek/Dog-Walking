@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semestral
+package cz.ctu.fit.bi.and.parizmat.semestral
 
 import org.junit.Test
 

@@ -3,14 +3,17 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("com.google.devtools.ksp")
+    // fire
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
-    namespace = "cz.ctu.fit.bi.and.semestral"
+    namespace = "cz.ctu.fit.bi.and.parizmat.semestral"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "cz.ctu.fit.bi.and.semestral"
+        applicationId = "cz.ctu.fit.bi.and.parizmat.semestral"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -55,55 +58,37 @@ android {
 }
 
 dependencies {
-//    implementation("androidx.core:core-ktx:1.13.1")
-//    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
-//    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.0")
-//    implementation("androidx.activity:activity-compose:1.9.0")
-//
-//    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
-//    implementation("androidx.compose.ui:ui")
-//    implementation("androidx.compose.ui:ui-graphics")
-//    implementation("androidx.compose.ui:ui-graphics")
-//    implementation("androidx.compose.ui:ui-tooling-preview")
-//    debugImplementation("androidx.compose.ui:ui-tooling")
-//    implementation("androidx.compose.material3:material3")
-//    implementation("androidx.navigation:navigation-compose:2.7.7")
-//    implementation("io.coil-kt:coil-compose:2.6.0")
-//    implementation("androidx.compose.ui:ui-tooling-preview")
-//    debugImplementation("androidx.compose.ui:ui-tooling")
-//    implementation("androidx.compose.material3:material3")
-//    implementation("androidx.compose.material3:material3-window-size-class")
-//    implementation("androidx.compose.runtime:runtime-livedata")
-    implementation ("androidx.core:core-ktx:1.13.1")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
-    implementation ("androidx.activity:activity-compose:1.9.0")
-    implementation ("androidx.compose.ui:ui:1.6.7")
-    implementation ("androidx.compose.ui:ui-tooling-preview:1.6.7")
-    implementation("androidx.compose.material3:material3:1.3.0-alpha06")
-    implementation ("androidx.compose.material:material:1.6.7")
-    implementation ("androidx.navigation:navigation-compose:2.7.7")
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.6.7")
-    debugImplementation ("androidx.compose.ui:ui-tooling:1.6.7")
-    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.6.7")
-    //Navigation
+    // Core-KTX
+    implementation("androidx.core:core-ktx:1.13.1")
+
+    // Activity Compose
+    implementation("androidx.activity:activity-compose:1.9.0")
+
+    // Jetpack Compose dependencies
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.material3:material3")
+
+    // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
-    //Coil
+
+    // Coil for image loading
     implementation("io.coil-kt:coil-compose:2.6.0")
 
-    // Room
+    // Room for database
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
 
-    // Koin
+    // Koin for dependency injection
     implementation(platform("io.insert-koin:koin-bom:3.5.3"))
     implementation("io.insert-koin:koin-android")
     implementation("io.insert-koin:koin-androidx-compose")
 
-    // OkHttp
+    // OkHttp for networking
     val okHttpVersion = "4.12.0"
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
@@ -111,22 +96,24 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
-    //LifeCycle
-    val lifecycleVersion = "2.8.0"
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    // Lifecycle components
+    val lifecycleVersion = "2.7.0"
+    //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
+    //noinspection GradleDependency
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
 
-    //Charts
-    // For Jetpack Compose.
+    // Charts with Vico
     implementation("com.patrykandpatrick.vico:compose:2.0.0-alpha.20")
-    // For `compose`. Creates a `ChartStyle` based on an M2 Material Theme.
     implementation("com.patrykandpatrick.vico:compose-m2:2.0.0-alpha.20")
-    // For `compose`. Creates a `ChartStyle` based on an M3 Material Theme.
     implementation("com.patrykandpatrick.vico:compose-m3:2.0.0-alpha.20")
-    // Houses the core logic for charts and other elements. Included in all other modules.
     implementation("com.patrykandpatrick.vico:core:2.0.0-alpha.20")
-    // For the view system.
-//    implementation("com.patrykandpatrick.vico:views:2.0.0-alpha.20")
+    implementation("com.patrykandpatrick.vico:views:2.0.0-alpha.20")
 
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
 }

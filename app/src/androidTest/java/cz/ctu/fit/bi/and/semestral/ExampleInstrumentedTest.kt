@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.semestral
+package cz.ctu.fit.bi.and.parizmat.semestral
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

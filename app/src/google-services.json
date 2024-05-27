@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "217954941841",
+    "project_id": "bi-and-semestral",
+    "storage_bucket": "bi-and-semestral.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217954941841:android:7af79008ae7d95b6c7f830",
+        "android_client_info": {
+          "package_name": "cz.ctu.fit.bi.and.parizmat.semestral"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcptaD8GtHyLn5lalyymTspmnKgwqRud8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
