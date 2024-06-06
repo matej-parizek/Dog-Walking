@@ -20,7 +20,7 @@ import androidx.compose.ui.layout.MeasurePolicy
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.Typography
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
 import kotlin.math.roundToInt
 
 /**

@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.core.ui
+package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import cz.ctu.fit.bi.and.parizmat.semestral.R
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.IconSize
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.Typography
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

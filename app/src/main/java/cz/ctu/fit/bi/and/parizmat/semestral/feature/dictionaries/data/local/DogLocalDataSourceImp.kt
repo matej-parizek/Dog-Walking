@@ -18,5 +18,6 @@ class DogLocalDataSourceImp(
         dao.filterByQueryStream(query)
             .map { it.map { dogEntity -> dogEntity.toDog() } }
 
-    override suspend fun clear()  = dao.clear()
+    override suspend fun deleteAll()  = dao.deleteAll()
+    override suspend fun count(): Int = dao.count()
 }

@@ -33,4 +33,5 @@
     <string name="steps">" steps"</string>
     <string name="height">Height</string>
     <string name="cm">" cm"</string>
+    <string name="something_gone_wrong">Something gone wrong</string>
 </resources>

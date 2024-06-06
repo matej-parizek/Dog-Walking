@@ -1,7 +1,6 @@
 package cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogEntity
@@ -22,5 +21,7 @@ interface DogDao {
     fun filterByQueryStream(query: String): Flow<List<DogEntity>>
 
     @Query("DELETE FROM dog_entity")
-    fun clear()
+    suspend fun deleteAll()
+    @Query("SELECT COUNT(*) FROM dog_entity")
+    suspend fun count() : Int
 }

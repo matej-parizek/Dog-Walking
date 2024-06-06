@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme
+package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme
 
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color

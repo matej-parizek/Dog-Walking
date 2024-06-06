@@ -7,7 +7,8 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.DogApi
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.DogRemoteDataSource
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogLocalDataSource
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogLocalDataSourceImp
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.DogViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.detail.DetailDogViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -27,4 +28,5 @@ val dictionariesModule = module {
         )
     }
     viewModel { DogViewModel(repository = get(), savedStateHandle = get()) }
+    viewModel{ DetailDogViewModel(repository = get(), savedStateHandle = get()) }
 }

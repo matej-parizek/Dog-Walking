@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.core.ui
+package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
@@ -14,8 +14,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import cz.ctu.fit.bi.and.parizmat.semestral.R
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.IconSize
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.Typography
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.Screens
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
 
 @Composable
 fun BottomBar(

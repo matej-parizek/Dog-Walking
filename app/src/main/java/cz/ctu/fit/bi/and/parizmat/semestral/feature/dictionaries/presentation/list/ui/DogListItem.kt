@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.ui
+package cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

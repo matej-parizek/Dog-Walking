@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.ui
+package cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,10 +27,11 @@ import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cz.ctu.fit.bi.and.parizmat.semestral.R
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.IconSize
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.Typography
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.DogState
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.DogViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.LoadingScreen
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogState
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -39,12 +40,14 @@ fun DictionariesScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val query by viewModel.name.collectAsStateWithLifecycle()
-    Search(
-        state = state,
-        query = query,
-        onChange = { viewModel.onChange(it) },
-        onRetry = { viewModel.retry() }
-    )
+    LoadingScreen(screenState = state) { data ->
+        Search(
+            state = data,
+            query = query,
+            onChange = { viewModel.onChange(it) },
+            onRetry = { viewModel.retry() }
+        )
+    }
 }
 
 @Composable
@@ -98,13 +101,12 @@ fun Search(
                 }
             }
         ) {
-
-            DogList(state.dogs)
+            DogList(state)
         }
         Spacer(modifier = Modifier.size(10.dp))
         if (!expanded) {
             onRetry()
-            DogList(state.dogs)
+            DogList(state)
         }
     }
 }

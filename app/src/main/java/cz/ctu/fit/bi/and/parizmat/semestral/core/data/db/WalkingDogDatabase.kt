@@ -12,11 +12,9 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.local.dao.Sett
 @Database(entities = [DogEntity::class, SettingEntity::class], version = 1, exportSchema = false)
 abstract class WalkingDogDatabase : RoomDatabase() {
     abstract fun dogDao(): DogDao
-    abstract fun settingPersonDao() : SettingDao
+    abstract fun settingPersonDao(): SettingDao
 
-            companion
-
-    object {
+    companion object {
         private const val DATABASE_NAME = "walking_dog_database"
 
         fun newInstance(context: Context): WalkingDogDatabase =

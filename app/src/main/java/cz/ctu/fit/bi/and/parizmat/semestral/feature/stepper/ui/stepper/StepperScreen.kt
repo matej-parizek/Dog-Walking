@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cz.ctu.fit.bi.and.parizmat.semestral.R
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.BackgroundCircleIndicator
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.CircleIndicator
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.IconSize
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.BackgroundCircleIndicator
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.CircleIndicator
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
 
 
 @Composable

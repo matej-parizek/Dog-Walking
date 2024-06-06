@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cz.ctu.fit.bi.and.parizmat.semestral.R
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingDogViewModel
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingPersonViewModel
-import cz.ctu.fit.bi.and.parizmat.semestral.core.ui.theme.Typography
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

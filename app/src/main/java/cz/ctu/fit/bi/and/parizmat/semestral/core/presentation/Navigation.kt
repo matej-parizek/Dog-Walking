@@ -1,12 +1,11 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.core.ui
+package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.ui.DictionariesScreen
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.ui.Search
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.ui.DictionariesScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.SettingsDogScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.SettingsScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatScreen
