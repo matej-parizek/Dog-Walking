@@ -29,8 +29,8 @@ fun DogListItem(
         horizontalArrangement = Arrangement.Center
     ) {
         AsyncImage(
-            model = dog.image,
-            error = painterResource(id = R.drawable.error),
+            model = "",
+            error = painterResource(id = R.drawable.dog),
             contentDescription = stringResource(id = R.string.avatar),
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))

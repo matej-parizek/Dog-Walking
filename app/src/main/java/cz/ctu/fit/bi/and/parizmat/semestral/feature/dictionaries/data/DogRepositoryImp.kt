@@ -13,7 +13,7 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.domain.Dog
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOf
-import java.io.IOException
+import retrofit2.HttpException
 
 class DogRepositoryImp(
     private val dogRemoteDataSource: DogRemoteDataSource,
@@ -36,22 +36,19 @@ class DogRepositoryImp(
             }
             dogLocalDataSource.upsertAll(dogs)
             Response.Success(Unit)
-        }catch (e: IOException){
-            Response.Success(Unit)
-        }
-        catch (e: Exception) {
-
+        } catch (e: Exception) {
             handleExceptionApi(e)
         }
     }
+
     override suspend fun deleteAll() {
-            dogLocalDataSource.deleteAll()
+        dogLocalDataSource.deleteAll()
     }
 
     //TODO: set to ERROR Screen
     override suspend fun getDogs(): Response<Flow<List<Dog>>, DataError> {
         return try {
-            dogLocalDataSource.count().takeIf { 0==it }?.let { throw EmptyDatabaseException() }
+            dogLocalDataSource.count().takeIf { 0 == it }?.let { throw EmptyDatabaseException() }
             Response.Success(dogLocalDataSource.getDogsStream())
         } catch (e: Exception) {
             handleExceptionDatabase(e)
@@ -65,6 +62,34 @@ class DogRepositoryImp(
                 .catch { emit(emptyList()) }
         } catch (e: Throwable) {
             flowOf(emptyList())
+        }
+    }
+
+    override suspend fun getDog(id: String): Response<Flow<Dog?>, DataError> {
+        return try {
+            val result = dogLocalDataSource.getDog(id = id)
+            Response.Success(result)
+        } catch (e: Exception) {
+            handleExceptionDatabase(e)
+        }
+    }
+
+    override suspend fun randomImage(dog: Dog): Response<Unit, DataError> {
+        return try {
+
+            val data = dog.name.lowercase().split(' ')
+            if (data.size == 2)
+                dog.image = dogRemoteDataSource.getImage(breed = data[1], name = data[0])
+            if (data.size == 1)
+                dog.image = dogRemoteDataSource.getImage(breed = data[0])
+            dogLocalDataSource.upsert(dog)
+            Response.Success(Unit)
+        }catch (e: HttpException){
+            if(e.code() != 404)
+                throw e
+            Response.Success(Unit)
+        }catch (e: Exception){
+            handleExceptionApi(e)
         }
     }
 }

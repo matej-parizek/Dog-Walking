@@ -29,11 +29,10 @@ fun BottomBar(
             name = stringResource(id = leftNavBarName(route)),
             selected = hasLeftRoute(route= route),
             onClick = {
-
                 navigationController.navigate(navigateLeft(route))
             }
         )
-        if(route != Screens.Dictionaries.route) {
+        if(route != Screens.Dictionaries.route &&  !route.startsWith("detail/")) {
             NavigationBarItem(
                 painter = painterResource(id = rightNavBarIcon(route)),
                 name = stringResource(id = rightNavBarName(route)),
@@ -47,10 +46,10 @@ fun BottomBar(
 }
 
 private fun navigateLeft(route: String): String {
+    if (route.startsWith("detail/")) return Screens.Dictionaries.route
     return when (route) {
         Screens.Stepper.route -> Screens.Stepper.route
         Screens.Stats.route -> Screens.Stepper.route
-
         Screens.Settings.route -> Screens.Settings.route
         Screens.SettingsDog.route -> Screens.Settings.route
         Screens.Dictionaries.route -> Screens.Dictionaries.route
@@ -59,6 +58,7 @@ private fun navigateLeft(route: String): String {
 }
 
 private fun navigateRight(route: String): String {
+    if (route.startsWith("detail/")) return Screens.Dictionaries.route
     return when (route) {
         Screens.Stepper.route -> Screens.Stats.route
         Screens.Stats.route -> Screens.Stats.route
@@ -70,6 +70,8 @@ private fun navigateRight(route: String): String {
 }
 
 private fun rightNavBarIcon(route: String): Int {
+
+    if (route.startsWith("detail/")) return R.drawable.dictionary
     return when (route) {
         Screens.Stepper.route -> R.drawable.stats
         Screens.Stats.route -> R.drawable.stats
@@ -84,16 +86,15 @@ private fun rightNavBarName(route: String): Int {
     return when (route) {
         Screens.Stepper.route -> R.string.stats
         Screens.Stats.route -> R.string.stats
-
         Screens.Settings.route -> R.string.dog
         Screens.SettingsDog.route -> R.string.dog
-
         Screens.Dictionaries.route -> R.string.search
         else -> R.string.error
     }
 }
 
 private fun leftNavBarIcon(route: String): Int {
+    if (route.startsWith("detail/")) return R.drawable.dictionary
     return when (route) {
         Screens.Stepper.route -> R.drawable.jogging
         Screens.Stats.route -> R.drawable.jogging
@@ -105,13 +106,12 @@ private fun leftNavBarIcon(route: String): Int {
 }
 
 private fun leftNavBarName(route: String): Int {
+    if (route.startsWith("detail/")) return R.string.dictionaries
     return when (route) {
         Screens.Stepper.route -> R.string.overview
         Screens.Stats.route -> R.string.overview
-
         Screens.Settings.route -> R.string.person
         Screens.SettingsDog.route -> R.string.person
-
         Screens.Dictionaries.route -> R.string.dictionaries
         else -> R.string.error
     }

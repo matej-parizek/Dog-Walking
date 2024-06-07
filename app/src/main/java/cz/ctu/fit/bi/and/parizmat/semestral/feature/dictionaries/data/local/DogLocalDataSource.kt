@@ -9,4 +9,6 @@ interface DogLocalDataSource {
     fun filterByQueryStream(query: String): Flow<List<Dog>>
     suspend fun deleteAll()
     suspend fun count(): Int
+    fun getDog(id:String) : Flow<Dog?>
+    suspend fun upsert(data:Dog )
 }

@@ -83,7 +83,7 @@ fun MainScreen() {
                         navigationController = navController
                     )
                 } else {
-                    //TODO: ERROR Screen
+                    ErrorScreen()
                 }
             }
         }
@@ -128,6 +128,10 @@ fun NavItem(
 }
 
 private fun route(route: String?): Int {
+
+    if (route?.takeIf { it.startsWith("detail/") } != null) {
+        return R.string.detail
+    }
     return when (route) {
         Screens.Stepper.route -> R.string.stepper
         Screens.Settings.route -> R.string.settings

@@ -5,18 +5,22 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.DogReposit
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.DogRepositoryImp
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.DogApi
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.DogRemoteDataSource
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.DogRemoteDataSourceImp
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.ImageApi
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogLocalDataSource
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogLocalDataSourceImp
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.detail.DetailDogViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.detail.DogDetailViewModel
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.module.dsl.factoryOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val dictionariesModule = module {
-    single { get<Retrofit>().create(DogApi::class.java) }
-    factoryOf(::DogRemoteDataSource)
+    single { get<Retrofit>(named("dogProvider")).create(DogApi::class.java) }
+    //second api
+    single { get<Retrofit>(named("imageProvider")).create(ImageApi::class.java) }
+    factory<DogRemoteDataSource> { DogRemoteDataSourceImp(dogApi = get(), imageApi = get()) }
 
     single { get<WalkingDogDatabase>().dogDao() }
     factory<DogLocalDataSource> { DogLocalDataSourceImp(dao = get()) }
@@ -28,5 +32,5 @@ val dictionariesModule = module {
         )
     }
     viewModel { DogViewModel(repository = get(), savedStateHandle = get()) }
-    viewModel{ DetailDogViewModel(repository = get(), savedStateHandle = get()) }
+    viewModel { DogDetailViewModel(repository = get(), savedStateHandle = get()) }
 }

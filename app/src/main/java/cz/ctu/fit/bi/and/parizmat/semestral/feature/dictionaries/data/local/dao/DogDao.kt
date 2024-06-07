@@ -10,8 +10,10 @@ import kotlinx.coroutines.flow.Flow
 interface DogDao {
     @Upsert
     suspend fun upsertAll(dogs: List<DogEntity>)
+    @Upsert
+    suspend fun upsert(dog: DogEntity)
 
-    @Query("SELECT * FROM dog_entity")
+    @Query("SELECT * FROM dog_entity ORDER BY dog_entity.name ASC")
     fun getDogsStream(): Flow<List<DogEntity>>
 
     @Query("SELECT * FROM dog_entity WHERE id =:id")

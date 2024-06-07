@@ -88,6 +88,9 @@ val Typography = Typography(
 )
 
 object IconSize {
+    val largeImage = 120.dp
+    val mediumImage = 80.dp
+    val smallImage = 48.dp
     val largeGraph = 96.dp
     val largeHead = 36.dp
     val mediumHead = 32.dp

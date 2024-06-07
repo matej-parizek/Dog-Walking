@@ -10,4 +10,6 @@ interface DogRepository {
     suspend fun fetch() : Response<Unit, DataError>
     suspend fun filterByQuery(query: String): Flow<List<Dog>>
     suspend fun deleteAll()
+    suspend fun getDog(id:String): Response<Flow<Dog?>,DataError>
+    suspend fun randomImage(dog:Dog) : Response<Unit,DataError>
 }

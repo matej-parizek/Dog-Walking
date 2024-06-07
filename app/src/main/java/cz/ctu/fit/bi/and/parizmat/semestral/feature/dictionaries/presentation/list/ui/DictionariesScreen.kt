@@ -30,12 +30,13 @@ import cz.ctu.fit.bi.and.parizmat.semestral.R
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.LoadingScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogState
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogsListState
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DictionariesScreen(
+    onClick: (String) -> Unit,
     viewModel: DogViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -45,7 +46,8 @@ fun DictionariesScreen(
             state = data,
             query = query,
             onChange = { viewModel.onChange(it) },
-            onRetry = { viewModel.retry() }
+            onRetry = { viewModel.retry() },
+            navigate = onClick
         )
     }
 }
@@ -53,10 +55,11 @@ fun DictionariesScreen(
 @Composable
 @ExperimentalMaterial3Api
 fun Search(
-    state: DogState,
+    state: DogsListState,
     query: String,
     onChange: (String) -> Unit,
-    onRetry: () -> Unit
+    navigate: (String) -> Unit,
+    onRetry: () -> Unit,
 ) {
 
     var expanded by rememberSaveable { mutableStateOf(false) }
@@ -101,12 +104,12 @@ fun Search(
                 }
             }
         ) {
-            DogList(state)
+            DogList(dogsListState = state, navigate = navigate )
         }
         Spacer(modifier = Modifier.size(10.dp))
         if (!expanded) {
             onRetry()
-            DogList(state)
+            DogList(dogsListState = state, navigate = navigate )
         }
     }
 }

@@ -16,13 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.domain.Dog
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogState
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.DogsListState
 
 @Composable
 fun DogList(
-    dogState: DogState,
+    navigate: (String) -> Unit,
+    dogsListState: DogsListState,
 ) {
-    val list = dogState.dogs
+    val list = dogsListState.dogs
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -33,9 +34,7 @@ fun DogList(
         items(list, key = { it.id }) { dog ->
             DogCard(
                 dog = dog,
-                onClick = {
-
-                },
+                onClick = navigate,
             )
         }
     }
@@ -45,10 +44,10 @@ fun DogList(
 @Composable
 private fun DogCard(
     dog: Dog,
-    onClick: () -> Unit = {},
+    onClick: (String) -> Unit = {},
 ) {
     Card(
-        modifier = Modifier.clickable(onClick = onClick),
+        modifier = Modifier.clickable(onClick = { onClick(dog.id) }),
         elevation = CardDefaults.cardElevation(2.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)

@@ -1,6 +1,5 @@
 package cz.ctu.fit.bi.and.parizmat.semestral.core.data
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import cz.ctu.fit.bi.and.parizmat.semestral.core.data.db.EmptyDatabaseException
 import cz.ctu.fit.bi.and.parizmat.semestral.core.data.db.NotFoundDatabaseException
 import retrofit2.HttpException

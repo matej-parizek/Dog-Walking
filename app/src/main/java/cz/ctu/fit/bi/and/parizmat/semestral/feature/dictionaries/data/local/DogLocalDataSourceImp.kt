@@ -20,4 +20,8 @@ class DogLocalDataSourceImp(
 
     override suspend fun deleteAll()  = dao.deleteAll()
     override suspend fun count(): Int = dao.count()
+
+    override fun getDog(id: String): Flow<Dog?> = dao.getDog(id).map { it?.toDog() }
+
+    override suspend fun upsert(data: Dog) = dao.upsert(data.toDogEntity())
 }

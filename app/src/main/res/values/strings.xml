@@ -34,4 +34,15 @@
     <string name="height">Height</string>
     <string name="cm">" cm"</string>
     <string name="something_gone_wrong">Something gone wrong</string>
+    <string name="image">Image</string>
+    <string name="detail">Detail</string>
+    <string name="weight_range">%1$s - %2$skg</string>
+    <string name="yearsRange">%1$s - %2$s years</string>
+    <string name="is_hypoallergenic">Is hypoallergenic:</string>
+    <string name="not_hypoallergenic">Not hypoallergenic</string>
+    <string name="hypoallergenic">Hypoallergenic</string>
+    <string name="female_weight">Female weight:</string>
+    <string name="male_weight">Male weight:</string>
+    <string name="lifespan">Lifespan:</string>
+    <string name="info">Info:</string>
 </resources>
