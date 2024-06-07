@@ -45,4 +45,10 @@
     <string name="male_weight">Male weight:</string>
     <string name="lifespan">Lifespan:</string>
     <string name="info">Info:</string>
+    <!-- permission text-->
+    <string name="permission_request">Activity and notification permission request</string>
+    <string name="ok">OK</string>
+    <string name="set_the_permissions_again">Set the permissions again?</string>
+    <string name="notification">Notification</string>
+    <string name="rationale">If application doesn\'t have permission, your steps wouldn\'t be count!</string>
 </resources>

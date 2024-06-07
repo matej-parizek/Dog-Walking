@@ -128,7 +128,6 @@ fun NavItem(
 }
 
 private fun route(route: String?): Int {
-
     if (route?.takeIf { it.startsWith("detail/") } != null) {
         return R.string.detail
     }
@@ -203,5 +202,4 @@ fun NavBottomBar(
             painter = R.drawable.settings,
         )
     }
-
 }

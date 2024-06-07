@@ -8,6 +8,8 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogE
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.dao.DogDao
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.local.SettingEntity
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.local.dao.SettingDao
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.data.local.StepCountEntity
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.data.local.dao.StepCountDao
 
 /**
  * Room database class for the WalkingDog application. This database contains tables for storing dog entities and settings entities and stepper entities.
@@ -20,10 +22,16 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.local.dao.Sett
  * - DogEntity: Represents individual dog details.
  * - SettingEntity: Represents various settings related to the application or user preferences.
  */
-@Database(entities = [DogEntity::class, SettingEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [DogEntity::class, SettingEntity::class, StepCountEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class WalkingDogDatabase : RoomDatabase() {
     abstract fun dogDao(): DogDao
     abstract fun settingPersonDao(): SettingDao
+
+    abstract fun stepCountDao(): StepCountDao
 
     companion object {
         private const val DATABASE_NAME = "walking_dog_database"

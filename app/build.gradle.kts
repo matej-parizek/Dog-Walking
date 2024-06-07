@@ -58,26 +58,22 @@ android {
 }
 
 dependencies {
-    // Core-KTX
+    // Core libraries
     implementation("androidx.core:core-ktx:1.13.1")
-
-    // Activity Compose
     implementation("androidx.activity:activity-compose:1.9.0")
 
-    // Jetpack Compose dependencies
+    // Jetpack Compose with Bill of Materials for version alignment
     implementation(platform("androidx.compose:compose-bom:2024.05.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.test.ext:junit-ktx:1.1.5")
-    androidTestImplementation("junit:junit:4.12")
-    debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.foundation:foundation")
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    // Coil for image loading
+    // Image loading with Coil
     implementation("io.coil-kt:coil-compose:2.6.0")
 
     // Room for database
@@ -89,8 +85,9 @@ dependencies {
     implementation(platform("io.insert-koin:koin-bom:3.5.3"))
     implementation("io.insert-koin:koin-android")
     implementation("io.insert-koin:koin-androidx-compose")
+    implementation("io.insert-koin:koin-androidx-workmanager:3.5.3")
 
-    // OkHttp for networking
+    // OkHttp and Retrofit for networking
     val okHttpVersion = "4.12.0"
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
@@ -100,12 +97,26 @@ dependencies {
 
     // Lifecycle components
     val lifecycleVersion = "2.7.0"
-    //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
-    //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+
+
+    // Firebase integration
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
+
+    // Permissions with Google's Accompanist library
+    implementation("com.google.accompanist:accompanist-permissions:0.30.1")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    // Testing libraries
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Charts with Vico
     implementation("com.patrykandpatrick.vico:compose:2.0.0-alpha.20")
@@ -113,9 +124,4 @@ dependencies {
     implementation("com.patrykandpatrick.vico:compose-m3:2.0.0-alpha.20")
     implementation("com.patrykandpatrick.vico:core:2.0.0-alpha.20")
     implementation("com.patrykandpatrick.vico:views:2.0.0-alpha.20")
-
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-crashlytics")
 }

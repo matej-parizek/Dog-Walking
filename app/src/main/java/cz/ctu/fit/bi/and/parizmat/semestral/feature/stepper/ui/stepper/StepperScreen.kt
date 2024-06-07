@@ -32,6 +32,7 @@ import cz.ctu.fit.bi.and.parizmat.semestral.R
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.BackgroundCircleIndicator
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.CircleIndicator
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.permisions.Permission
 
 
 @Composable
@@ -39,14 +40,14 @@ import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
 fun StepperScreen(
     viewModel: StepperViewModel = StepperViewModel(),
 ) {
-
-    //TODO FROM VIEW
-    Column {
-        ProcessIndicator(
-            modifier = Modifier.fillMaxWidth(),
-            size = 150.dp,
-            viewModel = viewModel
-        )
+    Permission(rationale = stringResource(R.string.rationale)){
+        Column {
+            ProcessIndicator(
+                modifier = Modifier.fillMaxWidth(),
+                size = 150.dp,
+                viewModel = viewModel
+            )
+        }
     }
 }
 
