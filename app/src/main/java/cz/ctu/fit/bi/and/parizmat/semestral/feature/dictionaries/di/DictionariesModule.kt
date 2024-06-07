@@ -16,21 +16,28 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val dictionariesModule = module {
-    single { get<Retrofit>(named("dogProvider")).create(DogApi::class.java) }
-    //second api
-    single { get<Retrofit>(named("imageProvider")).create(ImageApi::class.java) }
-    factory<DogRemoteDataSource> { DogRemoteDataSourceImp(dogApi = get(), imageApi = get()) }
+/**
+ * Dependency injection module for the Dog Dictionary feature. This module configures and provides
+ * all necessary dependencies.
+ *
+ * - `DogApi`: API interface for dog-related network operations. This API is used for data of dog breed
+ * - `ImageApi`: API interface for image-related network operations. This API is used for image of dog
+ */
 
+val dictionariesModule = module {
+    // Network layer dependencies
+    single { get<Retrofit>(named("dogProvider")).create(DogApi::class.java) }
+    single { get<Retrofit>(named("imageProvider")).create(ImageApi::class.java) }
+
+    // Repository and data source dependencies
+    factory<DogRemoteDataSource> { DogRemoteDataSourceImp(dogApi = get(), imageApi = get()) }
     single { get<WalkingDogDatabase>().dogDao() }
     factory<DogLocalDataSource> { DogLocalDataSourceImp(dao = get()) }
-
     single<DogRepository> {
-        DogRepositoryImp(
-            dogRemoteDataSource = get(),
-            dogLocalDataSource = get()
-        )
+        DogRepositoryImp(dogRemoteDataSource = get(), dogLocalDataSource = get())
     }
+
+    // ViewModel dependencies
     viewModel { DogViewModel(repository = get(), savedStateHandle = get()) }
     viewModel { DogDetailViewModel(repository = get(), savedStateHandle = get()) }
 }

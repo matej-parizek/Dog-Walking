@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
-//    private val dao: DogDao by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,18 +21,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        deleteDogTable()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        deleteDogTable()
-//    }
-//    private fun deleteDogTable(){
-//        CoroutineScope(Dispatchers.IO).launch{
-//            dao.deleteAll()
-//        }
-//    }
 }

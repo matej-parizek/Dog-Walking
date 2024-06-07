@@ -15,6 +15,12 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.Set
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stepper.StepperScreen
 
+/**
+ * Sets up the navigation graph for the application using Jetpack Compose Navigation
+ *
+ * @param modifier Modifier applied to the NavHost, for customizing layout or appearance.
+ * @param navController The navigation controller that manages navigation within the NavHost.
+ */
 @Composable
 fun Navigation(
     modifier: Modifier,

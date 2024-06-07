@@ -45,7 +45,6 @@ class DogRepositoryImp(
         dogLocalDataSource.deleteAll()
     }
 
-    //TODO: set to ERROR Screen
     override suspend fun getDogs(): Response<Flow<List<Dog>>, DataError> {
         return try {
             dogLocalDataSource.count().takeIf { 0 == it }?.let { throw EmptyDatabaseException() }

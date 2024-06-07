@@ -20,6 +20,13 @@ import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typograph
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Composable function that creates a top app bar for the application, designed to be used across various screens.
+ *
+ * @param coroutineScope The CoroutineScope in which to execute asynchronous tasks, such as opening the drawer.
+ * @param drawerState The state of the navigation drawer, controlling whether it's open or closed.
+ * @param text Resource ID for the title text to be displayed in the top app bar. Defaults to R.string.error if not specified.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTopBar(

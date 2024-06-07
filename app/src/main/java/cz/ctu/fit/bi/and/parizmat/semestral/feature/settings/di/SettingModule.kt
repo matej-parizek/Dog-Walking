@@ -10,7 +10,12 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.Settin
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * This module sets up the dependency injection for database access and data handling,
+ * specifically tailored to manage settings for both persons and dogs within the application.
+ */
 val settingsModule = module {
+
     single { get<WalkingDogDatabase>().settingPersonDao() }
 
     factory<SettingLocalDataSource> { SettingLocalDataSourceImp(dao = get()) }

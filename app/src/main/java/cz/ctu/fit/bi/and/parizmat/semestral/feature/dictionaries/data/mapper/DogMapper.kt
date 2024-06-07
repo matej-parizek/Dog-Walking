@@ -3,7 +3,15 @@ package cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.mapper
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.api.dto.DogDto
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.data.local.DogEntity
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.domain.Dog
-
+/**
+ * Extension function to convert a DogDto object to a Dog entity.
+ *
+ * @param groupName A function that accepts a group ID (as a String) and returns a nullable String,
+ * representing the human-readable name of the group. If the group name is not found, it returns null,
+ * and "Error" is used as the group name in the resulting Dog object.
+ *
+ * @return Dog Returns a Dog entity with properties mapped from the DogDto
+ */
 fun DogDto.toDog(groupName: (String) -> String?): Dog {
     val group = groupName(relationships.group.data.id) ?: "Error"
     return Dog(
@@ -17,7 +25,11 @@ fun DogDto.toDog(groupName: (String) -> String?): Dog {
         group = group,
     )
 }
-
+/**
+ * Extension function to convert a Dog model to a DogEntity for database storage.
+ *
+ * @return DogEntity Returns a DogEntity object with properties derived from the Dog model.
+ */
 fun Dog.toDogEntity(): DogEntity {
     return DogEntity(
         id = id,
@@ -34,7 +46,11 @@ fun Dog.toDogEntity(): DogEntity {
         lifeMax = life.max,
     )
 }
-
+/**
+ * Extension function to convert a DogEntity from the database into a Dog model.
+ *
+ * @return Dog Returns a Dog object reconstructed with all properties from the DogEntity.
+ */
 fun DogEntity.toDog(): Dog {
     return Dog(
         id = id,
