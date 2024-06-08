@@ -6,16 +6,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -28,26 +32,65 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cz.ctu.fit.bi.and.parizmat.semestral.R
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.LoadingScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.BackgroundCircleIndicator
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.CircleIndicator
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.permisions.Permission
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.domain.StepCounter
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatScreen
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatsViewModel
+import org.koin.androidx.compose.koinViewModel
+import android.icu.math.BigDecimal
+
 
 
 @Composable
 @Preview
 fun StepperScreen(
-    viewModel: StepperViewModel = StepperViewModel(),
+    viewModel: StepperViewModel = koinViewModel(),
 ) {
-    Permission(rationale = stringResource(R.string.rationale)){
-        Column {
-            ProcessIndicator(
-                modifier = Modifier.fillMaxWidth(),
-                size = 150.dp,
-                viewModel = viewModel
-            )
+    Permission(rationale = stringResource(R.string.rationale)) {
+        val scrollState = rememberScrollState()
+
+        Column(
+            modifier = Modifier
+                .verticalScroll(state = scrollState, enabled = true)
+                .fillMaxHeight(0.8f),
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Overview()
+            Statistic()
         }
+    }
+}
+
+
+@Composable
+fun Statistic(
+    viewModel: StatsViewModel = koinViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    LoadingScreen(screenState = state ) {
+        StatScreen(it)
+    }
+}
+
+@Composable
+fun Overview(
+    viewModel: StepperViewModel = koinViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    LoadingScreen(screenState = state) {
+        ProcessIndicator(
+            modifier = Modifier.fillMaxWidth(),
+            size = 150.dp,
+            stepperState = it
+        )
     }
 }
 
@@ -56,7 +99,7 @@ fun StepperStat(
     modifier: Modifier = Modifier,
     kcalValue: Double = 20.5,
     elevationGain: Double = 20.5,
-    steps: Int = 35000,
+    steps: Long = 35000L,
 ) {
     Column(modifier) {
         IconWithText(
@@ -113,23 +156,20 @@ fun IconWithText(
  *
  * @param size The size of the circular progress indicator.
  * @param id The resource ID for an optional icon or image.
- * @param viewModel The ViewModel instance providing data.
+ * @param stepCounter Data
  */
 @Composable
 fun StepperData(
     size: Dp = 96.dp,
     id: Int = R.drawable.error,
-    viewModel: StepperViewModel,
+    stepCounter: StepCounter
 ) {
     Column(
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val personKcal = 10.5
-        val personEvaluation = 1.5
-        val personSteps = 3005
-        val progress = 1f
+        val progress = if (stepCounter.progress > 1f) 1f else stepCounter.progress
         CustomCircularProgressIndicator(
             progress = progress,
             size = size,
@@ -137,9 +177,9 @@ fun StepperData(
         )
         Spacer(modifier = Modifier.height(20.dp))
         StepperStat(
-            kcalValue = personKcal,
-            elevationGain = personEvaluation,
-            steps = personSteps
+            kcalValue = stepCounter.kcal,
+            elevationGain = stepCounter.evaluation,
+            steps = stepCounter.steps
         )
     }
 }
@@ -149,13 +189,13 @@ fun StepperData(
  *
  * @param modifier The modifier to apply to the process indicator.
  * @param size Size of the circular indicator.
- * @param viewModel ViewModel
+ * @param stepperState Data
  */
 @Composable
 fun ProcessIndicator(
     modifier: Modifier = Modifier,
     size: Dp = 96.dp,
-    viewModel: StepperViewModel
+    stepperState: StepperState
 ) {
     Row(
         modifier = modifier,
@@ -164,12 +204,12 @@ fun ProcessIndicator(
         StepperData(
             size = size,
             id = R.drawable.jogging,
-            viewModel = viewModel
+            stepCounter = stepperState.person
         )
         StepperData(
             size = size,
             id = R.drawable.running_dog,
-            viewModel = viewModel
+            stepCounter = stepperState.dog
         )
     }
 }
@@ -193,6 +233,7 @@ fun CustomCircularProgressIndicator(
         val padding = Dp(size.value * 0.1f)
         val measurement = size + padding
         val iconSize = Dp(size.value / 6f)
+        val textValue = adjustString(progress * 100)
         Box(
             modifier = Modifier
                 .size(measurement)
@@ -228,12 +269,17 @@ fun CustomCircularProgressIndicator(
                     .fillMaxSize()
                     .padding(iconSize)
             )
+
             Text(
                 fontSize = textSize,
-                text = "${progress * 100}%",
+                text = "$textValue%",
                 fontWeight = FontWeight.Bold,
             )
 
         }
     }
+}
+
+fun adjustString(value: Float):String{
+    return BigDecimal(value.toDouble()).setScale(2,BigDecimal.ROUND_HALF_UP).toString()
 }

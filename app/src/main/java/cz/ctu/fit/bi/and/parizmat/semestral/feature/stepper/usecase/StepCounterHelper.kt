@@ -12,14 +12,13 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.coroutines.resume
 
-private const val TAG = "STEP_COUNT_LISTENER"
 
-class StepCounter(
+class StepCounterHelper(
 ) : KoinComponent {
     private lateinit var sensorManager: SensorManager
     private var sensor: Sensor? = null
-    private var supportedAndEnabled: Boolean = false
     private val context: Context by inject()
+    private val TAG = "STEP_COUNT_LISTENER"
 
     init {
         createChannel()
@@ -43,7 +42,7 @@ class StepCounter(
                 Log.d(TAG, "Accuracy changed to: $accuracy")
             }
         }
-        supportedAndEnabled = sensorManager.registerListener(
+        sensorManager.registerListener(
             listener,
             sensor, SensorManager.SENSOR_DELAY_UI
         )

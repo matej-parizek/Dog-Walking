@@ -136,7 +136,6 @@ private fun route(route: String?): Int {
         Screens.Settings.route -> R.string.settings
         Screens.SettingsDog.route -> R.string.settings
         Screens.Dictionaries.route -> R.string.dictionaries
-        Screens.Stats.route -> R.string.stats
         else -> R.string.error
     }
 }

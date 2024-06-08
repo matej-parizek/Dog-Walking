@@ -29,6 +29,8 @@ fun Permission(
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         permissions += Manifest.permission.ACTIVITY_RECOGNITION
     }
+    permissions+=Manifest.permission.INTERNET
+
     val permissionState = rememberMultiplePermissionsState(permissions)
     if (permissionState.allPermissionsGranted) {
         content()

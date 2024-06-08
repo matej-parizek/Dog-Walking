@@ -53,30 +53,14 @@ import kotlinx.coroutines.withContext
  **/
 
 @Composable
-fun StatScreen() {
+fun StatScreen(statsState: StatsState) {
     val modelProducer = remember { CartesianChartModelProducer.build() }
     LaunchedEffect(Unit) {
         withContext(Dispatchers.Default) {
             modelProducer.tryRunTransaction {
                 columnSeries {
-                    /* Set Value */
-
-                    val list = listOf<Float>(
-                        0.15f,
-                        28f,
-                        48f,
-                        15f,
-                        16f,
-                        48f,
-                        0.15f,
-                        28f,
-                        48f,
-                        15f,
-                        16f,
-                        48f
-                    )
                     series(
-                        list
+                        statsState.data
                     )
                 }
             }

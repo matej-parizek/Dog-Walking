@@ -37,7 +37,7 @@ sealed interface DataError : Error {
         TOO_MANY_REQUESTS,
         REQUEST_HEADER_FIELDS_TOO_LARGE,
         UNAVAILABLE_FOR_LEGAL_REASONS,
-        UNKNOWN_ERROR,      //Unexpected error
+        UNKNOWN_API_ERROR,      //Unexpected error
         NO_INTERNET,
     }
 
@@ -47,7 +47,7 @@ sealed interface DataError : Error {
     enum class Database : DataError {
         NOT_FOUND,
         EMPTY,
-        UNKNOWN_ERROR,
+        UNKNOWN_DATABASE_ERROR,
 
     }
 }

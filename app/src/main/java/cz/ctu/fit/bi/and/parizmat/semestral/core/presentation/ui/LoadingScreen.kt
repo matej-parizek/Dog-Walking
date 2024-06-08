@@ -26,7 +26,7 @@ fun <T : ScreenStateEntity> LoadingScreen(
     when(screenState){
         is ScreenState.Loading-> LoadingState()
         is ScreenState.Loaded<T> -> screenFunction(screenState.data)
-        is ScreenState.Error -> ErrorScreen()
+        is ScreenState.Error -> ErrorScreen(screenState.data.toString())
     }
 }
 

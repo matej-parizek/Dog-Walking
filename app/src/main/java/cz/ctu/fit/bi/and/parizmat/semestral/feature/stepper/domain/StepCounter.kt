@@ -1,9 +1,9 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.data
+package cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.domain
 
 data class StepCounter(
-    val steps: Long,
-    val evaluation: Double,
-    val kcal: Double,
-    val progress: Float
+    val steps: Long = 10000,
+    val evaluation: Double = 0.0,
+    val kcal: Double = 2.0,
+    val progress: Float = 0.5f
 ) {
 }

@@ -1,6 +1,5 @@
 package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -12,7 +11,6 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.de
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.dictionaries.presentation.list.ui.DictionariesScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.SettingsDogScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.SettingsScreen
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stepper.StepperScreen
 
 /**
@@ -33,9 +31,6 @@ fun Navigation(
     ) {
         composable(route = Screens.Stepper.route) {
             StepperScreen()
-        }
-        composable(route = Screens.Stats.route) {
-            StatScreen()
         }
         composable(route = Screens.Settings.route) {
             SettingsScreen()

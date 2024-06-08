@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Upsert
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.data.local.StepCountEntity
 
 @Dao
@@ -15,7 +16,9 @@ interface StepCountDao {
             "AND created_at < date(:startDateTime, '+1 day')")
     suspend fun loadAllStepsFromToday(startDateTime: String): Array<StepCountEntity>
 
-    @Insert
+    @Query("SELECT * FROM steps")
+    suspend fun loadAllSteps(): Array<StepCountEntity>
+    @Upsert
     suspend fun insertAll(vararg steps: StepCountEntity)
 
     @Delete

@@ -24,7 +24,7 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.data.local.dao.StepC
  */
 @Database(
     entities = [DogEntity::class, SettingEntity::class, StepCountEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class WalkingDogDatabase : RoomDatabase() {
@@ -48,6 +48,6 @@ abstract class WalkingDogDatabase : RoomDatabase() {
                 context = context,
                 klass = WalkingDogDatabase::class.java,
                 name = DATABASE_NAME
-            ).build()
+            ).fallbackToDestructiveMigration().build()
     }
 }
