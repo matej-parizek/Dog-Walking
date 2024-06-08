@@ -1,4 +1,4 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats
+package cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
