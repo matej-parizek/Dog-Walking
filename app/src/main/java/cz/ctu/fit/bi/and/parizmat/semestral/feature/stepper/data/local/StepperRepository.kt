@@ -19,6 +19,12 @@ class StepperRepository(
     private val settingDao: SettingDao
 ) {
 
+    /**
+     * Stores the number of steps since the last reboot into the database.
+     * This is executed in the background thread to avoid blocking the UI.
+     *
+     * @param stepsSinceLastReboot The steps counted since the last reboot.
+     */
     suspend fun storeSteps(stepsSinceLastReboot: Long) = withContext(Dispatchers.IO) {
         val stepCount = StepCountEntity(
             steps = stepsSinceLastReboot,
@@ -26,7 +32,11 @@ class StepperRepository(
         )
         stepsDao.insertAll(stepCount)
     }
-
+    /**
+     * Loads the steps recorded for the current day and calculates the difference between the first and last data point.
+     *
+     * @return A Response object containing either the calculated steps or an error.
+     */
     suspend fun loadTodaySteps(): Response<Long, DataError> {
         return try {
 
@@ -53,6 +63,11 @@ class StepperRepository(
         }
     }
 
+    /**
+     * Loads all steps data, groups them by date, and calculates the total steps for each day.
+     *
+     * @return A Response object containing a pair of lists for steps and corresponding days, or an error.
+     */
     suspend fun loadSteps(): Response<Pair<List<Float>,List<String>>, DataError> {
         return try {
             val result = stepsDao.loadAllSteps().groupBy {
@@ -71,7 +86,18 @@ class StepperRepository(
         }
     }
 
+    /**
+     * Retrieves person settings from the settings database for person.
+     *
+     * @return LiveData or an object containing the settings data for a person.
+     */
     fun settingsPerson() = settingDao.get(0)
+
+    /**
+     * Retrieves dog settings from the settings database for dog.
+     *
+     * @return LiveData or an object containing the settings data for a dog.
+     */
     fun settingsDog() = settingDao.get(1)
 }
 

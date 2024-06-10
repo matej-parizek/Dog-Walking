@@ -5,5 +5,4 @@ data class StepCounter(
     val evaluation: Double = 0.0,
     val kcal: Double = 2.0,
     val progress: Float = 0.5f
-) {
-}
+)
