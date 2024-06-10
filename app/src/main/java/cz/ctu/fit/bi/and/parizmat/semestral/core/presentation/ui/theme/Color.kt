@@ -7,12 +7,16 @@ val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 
+val columnColors = listOf(Color(0xFF701D7E), Color(0xFF9B5AA7), Color(0xFFA782AD))
+val horizontalBoxColor = Color(0xFF19FF00)
+
+
+
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 val BackgroundCircleIndicator = Color(0xFFE9E9E9)
 val CircleIndicator = Color(0xFF00157A)
-val Shadow = Color(0xCD242424)
 val HomeworkLightColorSchema = lightColorScheme(
     primary = Color(0xFF0000FF),
     primaryContainer = Color(0xFFF4F4F9),
@@ -22,6 +26,7 @@ val HomeworkLightColorSchema = lightColorScheme(
     onSecondary = Color(0xFF666666),
     onTertiary = Color(0xFFB3B3B3),
     outlineVariant = Color(0xFFF0F0F0),
+    background = Color(0xFFE7E7E7)
 )
 val HomeworkDarkColorSchema = lightColorScheme(
     primary = Color(0xFF9595FE),
@@ -32,4 +37,5 @@ val HomeworkDarkColorSchema = lightColorScheme(
     onSecondary = Color(0xFF8B8B8C),
     onTertiary = Color(0xFF5D5D5E),
     outlineVariant = Color(0xFF5D5D5E),
+    background = Color(0xFF3D3D3D)
 )

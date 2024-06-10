@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
@@ -27,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -38,6 +40,7 @@ import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.Navigation
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.Screens
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.IconSize
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.sideBarSize
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -50,15 +53,15 @@ fun MainScreen() {
 
     ModalNavigationDrawer(
         drawerState = drawableState,
-        gesturesEnabled = false,
-
+        gesturesEnabled = true,
+        modifier = Modifier.background(MaterialTheme.colorScheme.primaryContainer),
         drawerContent = {
             NavBottomBar(
                 navController = navController,
                 drawableState = drawableState,
                 coroutineScope = coroutineScope
             )
-        }
+        },
     ) {
         val currentEntry by navController.currentBackStackEntryAsState()
         val currentRoute = currentEntry?.destination?.route
@@ -73,7 +76,9 @@ fun MainScreen() {
                     drawerState = drawableState,
                     text = text
                 )
-            }
+            },
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.primaryContainer
         ) {
             Column(Modifier.padding(it)) {
                 Navigation(navController = navController, modifier = Modifier.weight(1f))
@@ -113,8 +118,17 @@ fun NavItem(
                 modifier = Modifier.size(IconSize.smallHead),
                 painter = painterResource(id = painter),
                 contentDescription = stringResource(R.string.bottom_icon),
+                tint = MaterialTheme.colorScheme.onTertiary
             )
         },
+        colors = NavigationDrawerItemDefaults.colors(
+            unselectedContainerColor = Color.Transparent, // Background color when not selected
+            selectedContainerColor = Color.Transparent, // Background color when selected
+            unselectedIconColor = MaterialTheme.colorScheme.onTertiary, // Icon color when not selected
+            selectedIconColor = MaterialTheme.colorScheme.onTertiary, // Icon color when selected
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary, // Text color when not selected
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary // Text color when selected
+        ),
         selected = false,
         onClick = {
             coroutineScope.launch {
@@ -147,7 +161,10 @@ fun NavBottomBar(
     coroutineScope: CoroutineScope
 ) {
 
-    ModalDrawerSheet(Modifier.fillMaxWidth(0.6f)) {
+    ModalDrawerSheet(
+        modifier = Modifier.fillMaxWidth(sideBarSize),
+        drawerContainerColor = MaterialTheme.colorScheme.secondaryContainer
+    ) {
         Box(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.secondary)

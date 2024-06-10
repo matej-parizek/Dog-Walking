@@ -5,8 +5,8 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.SettingReposit
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.SettingRepositoryImp
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.local.SettingLocalDataSource
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.local.SettingLocalDataSourceImp
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingDogViewModel
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingPersonViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.dog.SettingDogViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.person.SettingPersonViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

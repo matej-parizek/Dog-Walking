@@ -50,7 +50,7 @@ private fun DogCard(dog: Dog = Dog()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState())
     ) {
         Card(
             modifier = Modifier
@@ -58,6 +58,9 @@ private fun DogCard(dog: Dog = Dog()) {
                 .padding(8.dp),
             elevation = CardDefaults.cardElevation(2.dp),
             shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.background
+            )
         ) {
             DogHeaderCard(dog)
             Spacer(modifier = Modifier.height(4.dp))
@@ -85,7 +88,7 @@ private fun DogHeaderCard(
             model = dog.image,
             contentDescription = stringResource(R.string.image),
             error = painterResource(id = R.drawable.dog),
-            modifier = Modifier.size(size = IconSize.largeImage)
+            modifier = Modifier.size(size = IconSize.largeImage),
         )
         Column(
             modifier = Modifier
@@ -114,8 +117,9 @@ private fun DogCardDetails(dog: Dog) {
             .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
-        Information(title = stringResource(R.string.is_hypoallergenic), value =
-        if(dog.hypoallergenic) stringResource(R.string.hypoallergenic) else stringResource(R.string.not_hypoallergenic)
+        Information(
+            title = stringResource(R.string.is_hypoallergenic), value =
+            if (dog.hypoallergenic) stringResource(R.string.hypoallergenic) else stringResource(R.string.not_hypoallergenic)
         )
         Information(
             title = stringResource(R.string.female_weight), value = stringResource(

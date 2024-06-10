@@ -1,24 +1,34 @@
-package cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation
+package cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.person
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.data.SettingRepository
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SettingDogViewModel(
+class SettingPersonViewModel(
     private val repository: SettingRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(SettingState())
     val state: StateFlow<SettingState> = _state
+    private val id = 0
 
-    private  val id = 1
     init {
         viewModelScope.launch {
             repository.initialize(id)
         }
         getData()
+    }
+
+
+    private fun getData() {
+        viewModelScope.launch {
+            repository.getSetting(id = id).collect {
+                _state.value = _state.value.copy(settings = it)
+            }
+        }
     }
 
     fun updateHeight(value: Float) {
@@ -36,14 +46,6 @@ class SettingDogViewModel(
     fun updateWeight(value: Float) {
         viewModelScope.launch {
             repository.updateWeight(id, value)
-        }
-    }
-
-    private fun getData() {
-        viewModelScope.launch {
-            repository.getSetting(id).collect {
-                _state.value = _state.value.copy(settings = it)
-            }
         }
     }
 }

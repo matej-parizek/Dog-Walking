@@ -27,8 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cz.ctu.fit.bi.and.parizmat.semestral.R
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingDogViewModel
-import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.SettingPersonViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.dog.SettingDogViewModel
+import cz.ctu.fit.bi.and.parizmat.semestral.feature.settings.presentation.ui.person.SettingPersonViewModel
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.Typography
 import org.koin.androidx.compose.koinViewModel
 
@@ -63,7 +63,7 @@ fun SettingsDogScreen(
             { modifier ->
                 Slider(
                     modifier = modifier,
-                    range = 20f..240f,
+                    range = 5f..90f,
                     postfix = stringResource(id = R.string.kg),
                     value = setting.weight,
                     onChange = { value -> viewModel.updateWeight(value= value) }
@@ -248,6 +248,7 @@ fun SettingOption(
         Text(
             text = text,
             style = Typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

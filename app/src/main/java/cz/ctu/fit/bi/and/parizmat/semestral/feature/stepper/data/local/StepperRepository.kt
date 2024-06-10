@@ -53,7 +53,7 @@ class StepperRepository(
         }
     }
 
-    suspend fun loadSteps(): Response<List<Float>, DataError> {
+    suspend fun loadSteps(): Response<Pair<List<Float>,List<String>>, DataError> {
         return try {
             val result = stepsDao.loadAllSteps().groupBy {
                 val result = it.createdAt.substringBefore('T')
@@ -64,7 +64,8 @@ class StepperRepository(
                 val min = it.value.minBy { steps -> steps.steps }
                 (max.steps - min.steps).toFloat()
             }
-            Response.Success(stepsPerDay)
+            val day = result.map { it.key }
+            Response.Success(Pair(stepsPerDay, day))
         } catch (e: Exception) {
             handleExceptionDatabase(e)
         }

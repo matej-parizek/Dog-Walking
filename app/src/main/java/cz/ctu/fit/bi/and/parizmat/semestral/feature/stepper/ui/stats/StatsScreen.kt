@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.rememberAxisGuidelineComponent
@@ -34,7 +35,6 @@ import com.patrykandpatrick.vico.core.cartesian.HorizontalDimensions
 import com.patrykandpatrick.vico.core.cartesian.Insets
 import com.patrykandpatrick.vico.core.cartesian.Scroll
 import com.patrykandpatrick.vico.core.cartesian.data.CartesianChartModelProducer
-import com.patrykandpatrick.vico.core.cartesian.data.CartesianValueFormatter
 import com.patrykandpatrick.vico.core.cartesian.data.columnSeries
 import com.patrykandpatrick.vico.core.cartesian.layer.ColumnCartesianLayer
 import com.patrykandpatrick.vico.core.cartesian.marker.CartesianMarker
@@ -43,6 +43,9 @@ import com.patrykandpatrick.vico.core.common.Dimensions
 import com.patrykandpatrick.vico.core.common.component.TextComponent
 import com.patrykandpatrick.vico.core.common.shape.Corner
 import com.patrykandpatrick.vico.core.common.shape.Shape
+import cz.ctu.fit.bi.and.parizmat.semestral.R
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.columnColors
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.horizontalBoxColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -66,11 +69,12 @@ fun StatScreen(statsState: StatsState) {
             }
         }
     }
-    ComposeChart6(modelProducer = modelProducer, modifier = Modifier.fillMaxWidth())
+    ComposeChart(modelProducer = modelProducer, modifier = Modifier.fillMaxWidth(), days = statsState.info)
 }
 
 @Composable
-private fun ComposeChart6(
+private fun ComposeChart(
+    days: List<String>,
     modelProducer: CartesianChartModelProducer,
     modifier: Modifier,
 ) {
@@ -91,7 +95,7 @@ private fun ComposeChart6(
                 ),
             ),
             startAxis = rememberStartAxis(),
-            bottomAxis = rememberBottomAxis(valueFormatter = bottomAxisValueFormatter),
+            bottomAxis = rememberBottomAxis(valueFormatter =  { x, _, _ -> days[x.toInt()] }),
             decorations = remember(horizontalBox) { listOf(horizontalBox) },
         ),
         modelProducer = modelProducer,
@@ -105,7 +109,7 @@ private fun ComposeChart6(
         ),
         placeholder = {
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = "You haven't walk yet. After walking chart will show up")
+                Text(text = stringResource(R.string.you_haven_t_walk_yet_after_walking_chart_will_show_up))
             }
         }
     )
@@ -118,12 +122,6 @@ private fun rememberHorizontalBox() =
         y = { 13f..14f },
         box = rememberShapeComponent(color = horizontalBoxColor.copy(.1f)),
     )
-
-private val columnColors = listOf(Color(0xFF701D7E), Color(0xFF9B5AA7), Color(0xFFA782AD))
-private val horizontalBoxColor = Color(0xFF19FF00)
-private val daysOfWeek = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-private val bottomAxisValueFormatter =
-    CartesianValueFormatter { x, _, _ -> daysOfWeek[x.toInt() % daysOfWeek.size] }
 
 
 @Composable

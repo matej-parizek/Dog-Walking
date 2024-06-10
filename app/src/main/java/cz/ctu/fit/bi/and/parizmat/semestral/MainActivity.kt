@@ -1,30 +1,29 @@
 package cz.ctu.fit.bi.and.parizmat.semestral
 
-import android.content.Context
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import android.hardware.SensorManager
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.MainScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.BIANDSEMETRALTheme
-import org.koin.android.ext.android.inject
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.sideBarSize
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.sideBarSizeHeight
+import cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui.theme.sideBarSizeWidth
 
 class MainActivity : ComponentActivity() {
-    private val  sensorManager: SensorManager by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
+        sideBarSize = if(resources.configuration.orientation == 1){
+            sideBarSizeHeight
+        }else{
+            sideBarSizeWidth
+        }
         super.onCreate(savedInstanceState)
         setContent {
             BIANDSEMETRALTheme {
                 MainScreen()
             }
         }
+        Log.d("Orientation", resources.configuration.orientation.toString())
     }
 
-    override fun onPause() {
-        super.onPause()
-//        sensorManager.unregisterListener(this)
-    }
 }

@@ -14,7 +14,12 @@ private val fontFamily = FontFamily(
     Font(R.font.inter_bold, weight = FontWeight.Bold),
 )
 
+val sideBarSizeHeight: Float
+    get() = 0.6f
+val sideBarSizeWidth: Float
+    get() = 0.4f
 
+var sideBarSize = sideBarSizeHeight
 val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -89,13 +94,8 @@ val Typography = Typography(
 
 object IconSize {
     val largeImage = 120.dp
-    val mediumImage = 80.dp
-    val smallImage = 48.dp
     val largeGraph = 96.dp
     val largeHead = 36.dp
-    val mediumHead = 32.dp
     val smallHead = 24.dp
-    val largeBody = 20.dp
     val mediumBody = 16.dp
-    val smallBody = 12.dp
 }

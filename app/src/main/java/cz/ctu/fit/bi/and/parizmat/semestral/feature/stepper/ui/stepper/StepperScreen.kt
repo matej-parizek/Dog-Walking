@@ -44,7 +44,7 @@ import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatScreen
 import cz.ctu.fit.bi.and.parizmat.semestral.feature.stepper.ui.stats.StatsViewModel
 import org.koin.androidx.compose.koinViewModel
 import android.icu.math.BigDecimal
-
+import android.util.Log
 
 
 @Composable
@@ -140,12 +140,14 @@ fun IconWithText(
             modifier = Modifier.size(IconSize.mediumBody),
             painter = painterResource(id = id),
             contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSecondary
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.padding(top = 4.dp)
+            modifier = Modifier.padding(top = 4.dp),
+            color = MaterialTheme.colorScheme.onPrimary
 
         )
     }
@@ -233,7 +235,7 @@ fun CustomCircularProgressIndicator(
         val padding = Dp(size.value * 0.1f)
         val measurement = size + padding
         val iconSize = Dp(size.value / 6f)
-        val textValue = adjustString(progress * 100)
+        val textValue = adjustString(progress*100f)
         Box(
             modifier = Modifier
                 .size(measurement)
@@ -274,6 +276,7 @@ fun CustomCircularProgressIndicator(
                 fontSize = textSize,
                 text = "$textValue%",
                 fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
         }

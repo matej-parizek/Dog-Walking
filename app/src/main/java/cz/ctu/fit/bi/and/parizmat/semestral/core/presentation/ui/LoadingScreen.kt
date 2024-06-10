@@ -1,8 +1,10 @@
 package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +38,7 @@ fun <T : ScreenStateEntity> LoadingScreen(
  */
 @Composable
 private fun LoadingState(){
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.primaryContainer), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()
     }
 }

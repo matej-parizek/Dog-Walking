@@ -23,7 +23,7 @@ class StatsViewModel(
                 is Response.Loading -> _state.value = ScreenState.Loading
                 is Response.Error -> _state.value = ScreenState.Error(result.data)
                 is Response.Success -> {
-                    _state.value = ScreenState.Loaded(StatsState(result.data))
+                    _state.value = ScreenState.Loaded(StatsState(data = result.data.first, info = result.data.second))
                 }
             }
         }
@@ -34,5 +34,6 @@ class StatsViewModel(
 
 
 data class StatsState(
-    val data: List<Float>
+    val data: List<Float>,
+    val info: List<String>
 ):ScreenStateEntity

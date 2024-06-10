@@ -1,10 +1,12 @@
 package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,9 +19,9 @@ import cz.ctu.fit.bi.and.parizmat.semestral.R
 @Composable
 fun ErrorScreen(text: String = stringResource(R.string.something_gone_wrong)) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.primaryContainer),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
             painter = painterResource(id = R.drawable.error),
