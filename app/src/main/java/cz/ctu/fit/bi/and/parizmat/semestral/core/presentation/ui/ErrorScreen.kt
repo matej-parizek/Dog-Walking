@@ -1,5 +1,6 @@
 package cz.ctu.fit.bi.and.parizmat.semestral.core.presentation.ui
 
+import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,8 +27,12 @@ fun ErrorScreen(text: String = stringResource(R.string.something_gone_wrong)) {
         Icon(
             painter = painterResource(id = R.drawable.error),
             contentDescription = stringResource(id = R.string.error),
-            modifier = Modifier.size(240.dp)
+            modifier = Modifier.size(240.dp),
+            tint = MaterialTheme.colorScheme.onPrimary
         )
-        Text(text = text)
+        Text(
+            color = MaterialTheme.colorScheme.onPrimary,
+            text = text
+        )
     }
 }
