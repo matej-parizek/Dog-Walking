@@ -14,8 +14,6 @@ Dog Walking is an application that tracks human steps while also calculating dog
 - Android 10.0 or newer; if the version is older, step counting will not be possible.
 - Internet connection
 
-## Installation
-
 ## Usage
 
 1. Open the Dog Walking application.
