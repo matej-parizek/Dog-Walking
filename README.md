@@ -1,6 +1,6 @@
 # Dog Walking
 
-Dog Walking is an application that tracks human steps while also calculating dog steps based on its size (small, medium, large). The application also allows setting the height, weight, and minimum number of steps for both humans and dogs. Additionally, it provides a list of all dog breeds with detailed information.
+Dog Walking is an application that tracks human steps while also calculating dog steps based on its size (small, medium, large). The application also allows setting the height, weight, and minimum number of steps for both humans and dogs. Additionally, it provides a list of all dog breeds with detailed informations.
 
 ## Features
 
